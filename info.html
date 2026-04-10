@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://i.ibb.co.com/DfCjtjDg/LOGO-HEADER.png">
+    <title>S-NX | Behind The Project</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+    
+    <style>
+        :root {
+            --bg-color: #000000;
+            --card-bg: #0a0a0a;
+            --primary-red: #ff0000;
+            --border-color: rgba(255, 255, 255, 0.15);
+            --text-main: #ffffff;
+            --text-gray: #a0a0a0;
+            --nav-bg: rgba(0, 0, 0, 0.9);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: var(--bg-color); color: var(--text-main); font-family: 'Montserrat', sans-serif; min-height: 100vh; line-height: 1.6; }
+
+        header { text-align: center; padding: 100px 8% 50px; background: var(--nav-bg); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-color); }
+        header span { font-size: 0.7rem; color: var(--primary-red); font-weight: 700; letter-spacing: 3px; text-transform: uppercase; }
+        header h1 { font-size: 2.5rem; margin-top: 10px; font-weight: 700; }
+
+        main { padding: 60px 8% 100px; max-width: 850px; margin: 0 auto; }
+        
+        ::selection { background-color: var(--text-main); color: var(--bg-color); }
+
+        section { margin-bottom: 50px; position: relative; padding-left: 25px; }
+        section::before { content: ''; position: absolute; left: 0; top: 5px; bottom: 5px; width: 4px; background: var(--primary-red); border-radius: 2px; }
+
+        section h3 { font-size: 1.1rem; color: var(--primary-red); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; }
+        section p { color: var(--text-gray); font-size: 0.95rem; margin-bottom: 10px; }
+        
+        /* Tag strong agar benar-benar Bold */
+        strong { color: var(--text-main); font-weight: 700; }
+
+        .dev-note { 
+            background: var(--card-bg); 
+            padding: 35px; 
+            border-radius: 12px; 
+            border: 1px solid var(--border-color); 
+            font-style: italic; 
+            margin: 40px 0;
+            border-left: 5px solid var(--primary-red);
+        }
+        .dev-note span { font-size: 0.8rem; color: var(--text-gray); display: block; margin-top: 20px; font-style: normal; font-weight: 600; }
+
+        .back-btn { 
+            text-decoration: none; 
+            color: var(--text-main); 
+            font-size: 0.85rem; 
+            font-weight: 700; 
+            padding: 14px 28px; 
+            border-radius: 50px; 
+            border: 1px solid var(--border-color); 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 12px; 
+            transition: 0.3s ease; 
+        }
+        .back-btn:hover { 
+            border-color: var(--primary-red); 
+            background: rgba(255, 0, 0, 0.1); 
+            transform: translateX(-5px); 
+        }
+
+        footer { text-align: center; padding: 40px; font-size: 0.7rem; color: var(--text-gray); border-top: 1px solid var(--border-color); letter-spacing: 1px; }
+
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.8rem; }
+            main { padding: 40px 5%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <span>BEHIND THE PROJECT</span>
+        <h1>S-NX × Education</h1>
+    </header>
+
+    <main>
+        
+        <section>
+            <h3>Maksud & Tujuan</h3>
+            <p>Proyek <strong>S-NX × Education</strong> ini dibangun khusus sebagai platform yang berguna untuk mendukung <strong>pembelajaran mandiri</strong> bagi seluruh siswa-siswi <strong>Ibnul Qayyim Islamic School Makassar (IQIS)</strong>.</p>
+            <p>Tujuan utamanya adalah untuk mempermudah teman-teman dalam mengakses informasi sekolah seperti tugas, materi, dan jadwal dalam satu pintu yang estetik dan fungsional.</p>
+            <p>Namun, karena saat ini saya mengelola proyek ini secara mandiri, fungsionalitas penuh web ini baru dapat saya maksimalkan khusus untuk <strong>Kelas 8A</strong> saja sebagai tahap awal.</p>
+            <p>Proyek ini juga hadir sebagai <strong>referensi awal</strong> yang dapat dikembangkan lebih lanjut oleh pihak sekolah. Jika nantinya proyek ini menarik perhatian <strong>Kepala Sekolah</strong>, saya sangat berharap fitur-fiturnya dapat dikembangkan menjadi lebih berlimpah dan tetap memberikan manfaat bagi <strong>adik-adik kelas</strong> di masa mendatang.</p>
+        </section>
+
+        <section>
+            <h3>Kolaborasi & AI Partner</h3>
+            <p>Portal ini dikembangkan secara penuh (solo developing) oleh <strong>Sthenos Nyx</strong>. Seluruh visual branding, tata letak, dan konsep desain adalah hasil kurasi individu.</p>
+            <p>Dalam proses pemrograman, <strong>S-NX</strong> berkolaborasi dengan kecerdasan buatan <strong>(Gemini AI)</strong> sebagai partner logika untuk membantu menyusun struktur HTML, CSS, dan JavaScript yang lebih efisien.</p>
+        </section>
+
+        <div class="dev-note">
+            "Karena ini adalah proyek individu yang dikelola di sela-sela waktu belajar, saya menyadari adanya keterbatasan dalam pemantauan data secara <strong>real-time</strong>. Terima kasih atas pengertiannya jika terdapat keterlambatan pembaruan informasi tugas atau jadwal."
+            <span>Sthenos Nyx | Developer, Designer, AI Collaborator</span>
+        </div>
+
+        <a href="tugas.html" class="back-btn">
+            <span class="material-symbols-rounded">arrow_back</span>
+            Kembali ke Beranda
+        </a>
+
+    </main>
+
+    <footer>
+        © Education × Education | 2026
+    </footer>
+
+    <script>
+        // === LOGIKA TEMA OTOMATIS UNTUK INFO.HTML ===
+        
+        // 1. Fungsi untuk menerapkan tema
+        function applyTheme(theme) {
+            if (theme === 'light') {
+                document.body.setAttribute('data-theme', 'light');
+            } else {
+                document.body.removeAttribute('data-theme');
+            }
+        }
+
+        // 2. Ambil "ingatan" tema dari halaman sebelumnya (LocalStorage)
+        // Jika tidak ada data, otomatis pakai tema Dark (khas S-NX)
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+
+        // 3. Langsung jalankan temanya saat halaman dibuka
+        applyTheme(savedTheme);
+    </script>
+</body>
+</html>
