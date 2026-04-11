@@ -30,8 +30,13 @@
         }
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: var(--bg-color); color: var(--text-main); font-family: 'Montserrat', sans-serif; transition: background-color 0.4s, color 0.4s; overflow-x: hidden; }
-        ::selection { background-color: var(--text-main); color: var(--bg-color); }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Montserrat', sans-serif;
+            transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-x: hidden;
+        }
 
         /* --- Navbar --- */
         nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 8%; border-bottom: 1px solid var(--border-color); background: var(--nav-bg); backdrop-filter: blur(20px); position: sticky; top: 0; z-index: 1000; }
@@ -41,92 +46,57 @@
         .nav-links a { text-decoration: none; color: var(--text-gray); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; transition: 0.3s; }
         .nav-links a.active, .nav-links a:hover { color: var(--primary-red); }
 
-        /* Menambahkan Menu Toggle Hamburger ke Jadwal */
-        .menu-toggle { display: none; flex-direction: column; cursor: pointer; gap: 6px; z-index: 1100; }
-        .bar { width: 25px; height: 2px; background-color: var(--text-main); transition: 0.4s; border-radius: 2px; }
-
-        /* --- Animasi Toggle Theme --- */
-        .theme-toggle-btn { 
-            background: transparent; border: 1px solid var(--border-color); color: var(--text-main); 
-            padding: 8px 22px; border-radius: 50px; font-size: 0.7rem; font-weight: 700; cursor: pointer; 
-            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); font-family: 'Montserrat'; display: flex; align-items: center; gap: 10px; overflow: hidden;
+        /* --- Theme Toggle (Kapsul Sliding) --- */
+        .theme-btn { 
+            width: 60px; height: 30px; border-radius: 30px;
+            background: transparent; border: 1px solid var(--border-color); 
+            position: relative; cursor: pointer; display: flex; align-items: center; padding: 0;
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); flex-shrink: 0; overflow: hidden;
         }
-        .theme-toggle-btn:hover { border-color: var(--primary-red); box-shadow: 0 0 10px rgba(255, 0, 0, 0.2); }
         
-        #themeIcon { font-size: 18px; transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.3s; }
-        .rotate-effect { transform: rotate(360deg) scale(1.2); opacity: 0; }
+        .theme-btn span#theme-icon { 
+            position: absolute; left: 6px; font-size: 20px; color: var(--text-main);
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+        }
 
-        /* --- Headline --- */
-        .hero { text-align: left; padding: 60px 8% 20px; max-width: 1200px; margin: 0 auto; }
+        /* Logic Geser saat Light Mode */
+        [data-theme="light"] .theme-btn span#theme-icon { 
+            left: 32px; color: var(--primary-red); 
+        }
+
+        /* --- Hero --- */
+        .hero { text-align: left; padding: 60px 8% 20px; max-width: 1200px; margin: 0 auto; animation: fadeInUp 0.8s both; }
         .hero h1 { font-size: 2.5rem; font-weight: 700; letter-spacing: -1px; }
         .hero p { color: var(--text-gray); margin-top: 15px; line-height: 1.8; max-width: 800px; font-size: 0.95rem; }
 
-        /* --- Calendar Layout (Responsif & Anti-Potong) --- */
-        .calendar-wrapper { padding: 20px 8% 80px; max-width: 1200px; margin: 0 auto; overflow-x: auto; padding-bottom: 30px; }
+        /* --- Calendar Layout --- */
+        .calendar-wrapper { padding: 20px 8% 80px; max-width: 1200px; margin: 0 auto; overflow-x: auto; }
         .month-year { font-size: 1.5rem; font-weight: 700; color: var(--primary-red); margin-bottom: 30px; text-transform: uppercase; letter-spacing: 1px; }
-
-        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 12px; min-width: 700px; /* Forces scroll on mobile */ }
+        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 12px; min-width: 700px; }
         .day-label { text-align: center; color: var(--text-gray); font-size: 0.7rem; font-weight: 700; padding-bottom: 15px; border-bottom: 1px solid var(--border-color); }
         
-        .day-cell { background: var(--card-bg); border: 1px solid var(--border-color); aspect-ratio: 1/1; padding: 12px; display: flex; flex-direction: column; transition: 0.4s; border-radius: 12px; }
-        .day-cell:hover { border-color: var(--primary-red); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .day-cell { background: var(--card-bg); border: 1px solid var(--border-color); aspect-ratio: 1/1; padding: 12px; display: flex; flex-direction: column; transition: 0.4s; border-radius: 12px; opacity: 0; animation: fadeInUp 0.5s forwards; }
+        .day-cell:hover { border-color: var(--primary-red); transform: translateY(-5px); }
         .day-cell.today { border: 2px solid var(--primary-red); background: rgba(255, 0, 0, 0.02); }
         .day-number { font-weight: 700; font-size: 0.9rem; color: var(--text-gray); margin-bottom: 10px; }
         .today .day-number { color: var(--primary-red); }
         
-        .event-tag { background: rgba(255, 0, 0, 0.1); color: var(--primary-red); font-size: 0.65rem; font-weight: 700; padding: 6px 10px; border-radius: 6px; border-left: 3px solid var(--primary-red); margin-bottom: 5px; line-height: 1.3; }
+        .event-tag { background: rgba(255, 0, 0, 0.1); color: var(--primary-red); font-size: 0.65rem; font-weight: 700; padding: 6px 10px; border-radius: 6px; border-left: 3px solid var(--primary-red); margin-bottom: 5px; }
         .event-tag.past-event { background: transparent; border: 1px dashed var(--border-color); color: var(--text-gray); opacity: 0.5; border-left: 1px dashed var(--border-color); }
 
         footer { text-align: center; padding: 40px 0; font-size: 0.75rem; color: var(--text-gray); border-top: 1px solid var(--border-color); font-weight: 600; }
-        .secret-link { color: inherit; text-decoration: none; transition: 0.3s; }
-        .secret-link:hover { color: var(--primary-red); text-shadow: 0 0 10px var(--primary-red); }
+        .secret-link { color: inherit; text-decoration: none; }
+        .secret-link:hover { color: var(--primary-red); }
 
-        /* --- Mobile Responsive --- */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 1.8rem; }
-            .calendar-grid { gap: 6px; }
-            .day-cell { padding: 6px; border-radius: 8px; }
-            .day-number { font-size: 0.75rem; }
-            .event-tag { font-size: 0.55rem; padding: 4px; }
-            
-            /* Mengaktifkan sidebar mobile */
-            .menu-toggle { display: flex; }
-            .nav-links { position: fixed; right: -100%; top: 0; flex-direction: column; background: var(--nav-bg); width: 100%; height: 100vh; justify-content: center; align-items: center; transition: 0.5s ease; border-left: 1px solid var(--border-color); z-index: 1050; }
-            .nav-links.active { right: 0; }
-        }
-
-        /* --- S-NX ANIMATION JADWAL --- */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Animasi Navbar dihapus */
-        .hero { animation: fadeInUp 0.8s both 0.2s; }
-        .month-year { animation: fadeInUp 0.8s both 0.3s; }
-        .day-cell { opacity: 0; animation: fadeInUp 0.5s forwards; }
-        .day-cell:nth-child(odd) { animation-delay: 0.4s; }
-        .day-cell:nth-child(even) { animation-delay: 0.5s; }
-        /* Tambahkan ini untuk mencegah bocor ke samping */
-        html, body {
-            overflow-x: hidden;
-            width: 100%;
-            position: relative;
-        }
-        
-        /* Update sidebar sedikit agar lebih aman */
+        /* Mobile Adjustments */
         @media (max-width: 768px) {
-            .sidebar {
-                /* Ganti left: -100% menjadi width statis agar browser tidak bingung */
-                left: -280px; 
-                width: 280px;
-                visibility: hidden; /* Sembunyikan total saat tidak aktif */
-            }
-            
-            .sidebar.active {
-                left: 0;
-                visibility: visible;
-            }
+            .hero h1 { font-size: 1.8rem; }
+            .nav-links { display: none; } /* Sidebar bisa kamu tambahkan jika perlu */
         }
     </style>
 </head>
@@ -134,24 +104,20 @@
     <nav>
         <div class="logo">S-NX × EDU</div>
         <div class="nav-right">
-            <ul class="nav-links" id="nav-list">
+            <ul class="nav-links">
                 <li><a href="tugas.html">Tugas</a></li>
                 <li><a href="materi.html">Materi</a></li>
                 <li><a href="jadwal.html" class="active">Jadwal</a></li>
             </ul>
-            <button class="theme-toggle-btn" id="themeToggle">
-                <span class="material-symbols-rounded" id="themeIcon">dark_mode</span>
-                <span id="themeText">DARK</span>
+            <button class="theme-btn" id="theme-btn">
+                <span class="material-symbols-rounded" id="theme-icon">dark_mode</span>
             </button>
-            <div class="menu-toggle" id="mobile-menu">
-                <span class="bar"></span><span class="bar"></span><span class="bar"></span>
-            </div>
         </div>
     </nav>
 
     <header class="hero">
         <h1>Prediksi Jadwal & Agenda</h1>
-        <p>Halaman ini berisi perkiraan acara mendatang untuk siswa-siswi <strong>IQIS Makassar</strong>. Agenda yang telah terlampaui akan diarsip otomatis (ditandai warna abu-abu). Jadwal bersifat referensi dan dapat berubah.</p>
+        <p>Halaman ini berisi perkiraan acara mendatang untuk siswa-siswi <strong>IQIS Makassar</strong>. Agenda yang telah terlampaui akan diarsip otomatis.</p>
     </header>
 
     <div class="calendar-wrapper">
@@ -166,39 +132,32 @@
     </footer>
 
     <script>
-        // === 1. LOGIKA TEMA ===
-        const themeBtn = document.getElementById('themeToggle');
-        const themeIcon = document.getElementById('themeIcon');
-        const themeText = document.getElementById('themeText');
+        // === 1. LOGIKA TEMA SLIDING ===
+        const themeBtn = document.getElementById('theme-btn');
+        const themeIcon = document.getElementById('theme-icon');
 
-        function updateUI(theme) {
+        function applyTheme(theme) {
             if (theme === 'light') {
                 document.body.setAttribute('data-theme', 'light');
-                if (themeIcon) themeIcon.innerText = "light_mode";
-                if (themeText) themeText.innerText = "LIGHT";
+                if(themeIcon) themeIcon.innerText = "light_mode";
+                localStorage.setItem('theme', 'light');
             } else {
                 document.body.removeAttribute('data-theme');
-                if (themeIcon) themeIcon.innerText = "dark_mode";
-                if (themeText) themeText.innerText = "DARK";
+                if(themeIcon) themeIcon.innerText = "dark_mode";
+                localStorage.setItem('theme', 'dark');
             }
         }
 
-        const savedTheme = localStorage.getItem('theme') || 'dark';
-        updateUI(savedTheme);
+        applyTheme(localStorage.getItem('theme') || 'dark');
 
-        if (themeBtn) {
+        if(themeBtn) {
             themeBtn.addEventListener('click', () => {
-                themeIcon.classList.add('rotate-effect');
-                const currentTheme = document.body.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-                setTimeout(() => {
-                    localStorage.setItem('theme', currentTheme);
-                    updateUI(currentTheme);
-                    themeIcon.classList.remove('rotate-effect');
-                }, 300);
+                const isLight = document.body.getAttribute('data-theme') === 'light';
+                applyTheme(isLight ? 'dark' : 'light');
             });
         }
 
-        // === 2. SISTEM KALENDER OTOMATIS ===
+        // === 2. SISTEM KALENDER ===
         const myEvents = {
             '2026-04-05': 'Tugas PAI',
             '2026-04-15': 'Deadline Matematika',
@@ -207,8 +166,6 @@
 
         function generateCalendar() {
             const grid = document.getElementById('calendarGrid');
-            if (!grid) return;
-            
             const now = new Date();
             const year = now.getFullYear();
             const month = now.getMonth();
@@ -229,6 +186,7 @@
             for (let day = 1; day <= daysInMonth; day++) {
                 const cell = document.createElement('div');
                 cell.className = 'day-cell';
+                cell.style.animationDelay = `${day * 0.02}s`;
                 const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
                 
                 if (dateStr === todayStr) cell.classList.add('today');
@@ -245,26 +203,6 @@
             }
         }
         generateCalendar();
-
-        // --- LOGIKA HAMBURGER MOBILE (FIXED) ---
-        function initMobileMenu() {
-            const mobileBtn = document.getElementById('mobile-menu');
-            const navList = document.getElementById('nav-list');
-            
-            if(mobileBtn && navList) {
-                mobileBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    navList.classList.toggle('active');
-                });
-
-                document.addEventListener('click', (e) => {
-                    if (!navList.contains(e.target) && !mobileBtn.contains(e.target) && navList.classList.contains('active')) {
-                        navList.classList.remove('active');
-                    }
-                });
-            }
-        }
-        document.addEventListener('DOMContentLoaded', initMobileMenu);
     </script>
 </body>
 </html>
