@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://i.ibb.co.com/DfCjtjDg/LOGO-HEADER.png">
+    <title>S-Edu | Welcome</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --bg: #000; 
+            --red: #ff0000; 
+            --text: #fff; 
+            --text-gray: #a0a0a0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background-color: var(--bg); 
+            color: var(--text); 
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        /* Container Utama */
+        .welcome-container { padding: 0 20px; }
+
+        /* Animasi Logo */
+        .logo-big { 
+            font-size: 3rem; 
+            font-weight: 700; 
+            letter-spacing: 5px; 
+            margin-bottom: 5px;
+            animation: fadeIn 1.5s ease;
+        }
+        .logo-big span { color: var(--red); }
+        
+        .subtitle { 
+            color: var(--red); 
+            font-size: 0.75rem; 
+            letter-spacing: 4px; 
+            text-transform: uppercase; 
+            font-weight: 700;
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards;
+            animation-delay: 0.4s;
+        }
+
+        /* Deskripsi 2 Baris */
+        .description {
+            color: var(--text-gray);
+            font-size: 0.85rem;
+            line-height: 1.8;
+            max-width: 550px;
+            margin: 0 auto 40px;
+            opacity: 0;
+            animation: fadeUp 1s ease forwards;
+            animation-delay: 0.8s;
+        }
+
+        /* Tombol Masuk */
+        .enter-btn {
+            text-decoration: none;
+            color: var(--text);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 14px 45px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-block;
+            opacity: 0;
+            animation: fadeUp 1s ease forwards;
+            animation-delay: 1.2s;
+        }
+
+        .enter-btn:hover {
+            border-color: var(--red);
+            box-shadow: 0 0 25px rgba(255, 0, 0, 0.3);
+            background: rgba(255, 0, 0, 0.05);
+            transform: scale(1.05);
+        }
+
+        /* Keyframes Animasi */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Styling Tombol Menu */
+        .menu-btn {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-main);
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .menu-btn { display: flex; }
+            
+            /* Sidebar mobile mode */
+            .sidebar {
+                position: fixed;
+                left: -100%; /* Sembunyi di kiri */
+                top: 0;
+                bottom: 0;
+                width: 280px;
+                z-index: 99999;
+                transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            
+            .sidebar.active {
+                left: 0; /* Muncul saat aktif */
+                box-shadow: 20px 0 50px rgba(0,0,0,0.5);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="welcome-container">
+        <div class="logo-big">S-NX<span> EDUCATION</span></div>
+        <div class="subtitle">Ibnul Qayyim Islamic School</div>
+        
+        <p class="description">
+            Wadah praktis untuk mengakses tugas, materi, dan jadwal kelas dalam satu pintu.
+            Dilengkapi fitur simpan tema otomatis dan arsip jadwal agar belajar lebih teratur.
+        </p>
+
+        <a href="tugas.html" class="enter-btn">MASUK</a>
+    </div>
+
+    <script>
+        const currentSavedTheme = localStorage.getItem('theme');
+        if (!currentSavedTheme) {
+            localStorage.setItem('theme', 'dark');
+        }
+    </script>
+</body>
+</html>

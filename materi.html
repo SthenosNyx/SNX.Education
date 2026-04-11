@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://i.ibb.co.com/DfCjtjDg/LOGO-HEADER.png">
+    <title>S-Edu | Materi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        :root { --bg-color: #000; --card-bg: #0a0a0a; --primary-red: #ff0000; --border-color: rgba(255, 255, 255, 0.15); --text-main: #fff; --text-gray: #a0a0a0; --glow-color: rgba(139, 0, 0, 0.45); --nav-bg: rgba(0, 0, 0, 0.8); }
+        [data-theme="light"] { --bg-color: #f4f4f5; --card-bg: #fff; --primary-red: #e60000; --border-color: rgba(0, 0, 0, 0.1); --text-main: #111; --text-gray: #666; --glow-color: rgba(255, 0, 0, 0.15); --nav-bg: rgba(244, 244, 245, 0.9); }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: var(--bg-color); color: var(--text-main); font-family: 'Montserrat', sans-serif; min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; transition: 0.4s; }
+        ::selection { background-color: var(--text-main); color: var(--bg-color); }
+
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 8%; border-bottom: 1px solid var(--border-color); background: var(--nav-bg); backdrop-filter: blur(20px); position: sticky; top: 0; z-index: 1000; transition: 0.4s; }
+        .logo { font-weight: 700; letter-spacing: 2px; }
+        .nav-right { display: flex; align-items: center; gap: 20px; }
+        .nav-links { display: flex; gap: 30px; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--text-gray); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; transition: 0.3s; }
+        .nav-links a.active, .nav-links a:hover { color: var(--primary-red); }
+        .theme-toggle-btn { background: transparent; border: 1px solid var(--border-color); color: var(--text-main); padding: 8px 20px; border-radius: 50px; font-size: 0.7rem; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Montserrat'; display: flex; align-items: center; gap: 8px; }
+        .theme-toggle-btn:hover { border-color: var(--primary-red); }
+
+        .menu-toggle { display: none; flex-direction: column; cursor: pointer; gap: 6px; z-index: 1100; }
+        .bar { width: 25px; height: 2px; background-color: var(--text-main); transition: 0.4s; border-radius: 2px; }
+
+        .filter-label { font-size: 0.7rem; color: var(--text-gray); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; display: block; text-align: center; }
+
+        .hero { text-align: center; padding: 80px 8% 40px; }
+        .hero h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 15px; }
+        .hero p { color: var(--text-gray); max-width: 600px; margin: 0 auto; line-height: 1.6; }
+
+        .container { padding: 40px 8% 80px; display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 25px; flex-grow: 1; max-width: 1200px; margin: 0 auto; width: 100%;}
+        
+        .card { background: var(--card-bg); border: 2px solid var(--border-color); border-radius: 25px; padding: 30px; transition: 0.4s ease; display: flex; flex-direction: column; gap: 15px; position: relative; overflow: hidden; }
+        .card:hover { border-color: var(--primary-red); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        
+        .card::before { content: ""; position: absolute; width: 500px; height: 500px; top: calc(var(--mouse-y, -500px) - 250px); left: calc(var(--mouse-x, -500px) - 250px); background: radial-gradient(circle, var(--glow-color) 0%, transparent 70%); opacity: 0; transition: opacity 0.5s ease; pointer-events: none; z-index: 0; }
+        .card:hover::before { opacity: 1; }
+
+        .card div { z-index: 1; position: relative; }
+        .card span { font-size: 0.65rem; color: var(--primary-red); font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; }
+        .btn-main { text-decoration: none; color: var(--text-main); font-size: 0.8rem; font-weight: 700; background: rgba(255,255,255,0.05); padding: 12px; border-radius: 12px; border: 1px solid var(--border-color); text-align: center; transition: 0.3s; margin-top: auto; position: relative; z-index: 1;}
+        .btn-main:hover { background: var(--text-main); color: var(--bg-color); }
+
+        footer { text-align: center; padding: 30px 0; font-size: 0.75rem; color: var(--text-gray); border-top: 1px solid var(--border-color); font-weight: 600; }
+
+        @media (max-width: 768px) { nav { padding: 20px 5%; } .menu-toggle { display: flex; } .nav-links { position: fixed; right: -100%; top: 0; flex-direction: column; background: var(--nav-bg); width: 100%; height: 100vh; justify-content: center; align-items: center; transition: 0.5s ease; border-left: 1px solid var(--border-color); z-index: 1050; } .nav-links.active { right: 0; } .container { grid-template-columns: 1fr; padding: 0 5% 40px; } }
+        .secret-link { color: inherit; text-decoration: none; cursor: default; transition: opacity 0.3s ease; }
+        .secret-link:hover { cursor: pointer; text-shadow: 0 0 8px var(--primary-red); }
+
+        @keyframes slideUp {
+            0% { opacity: 0; transform: translateY(40px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Animasi Navbar dihapus */
+
+        .hero { opacity: 0; animation: slideUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards 0.2s; }
+        .task-card, .card { opacity: 0; animation: slideUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+        .task-card:nth-child(1), .card:nth-child(1) { animation-delay: 0.4s; }
+        .task-card:nth-child(2), .card:nth-child(2) { animation-delay: 0.5s; }
+        .task-card:nth-child(3), .card:nth-child(3) { animation-delay: 0.6s; }
+        .task-card:nth-child(4), .card:nth-child(4) { animation-delay: 0.7s; }
+        .task-card:nth-child(5), .card:nth-child(5) { animation-delay: 0.8s; }
+        .task-card:nth-child(6), .card:nth-child(6) { animation-delay: 0.9s; }
+    </style>
+</head>
+<body data-theme="dark">
+    <nav>
+        <div class="logo">S-NX × EDU</div>
+        <div class="nav-right">
+            <ul class="nav-links" id="nav-list">
+                <li><a href="tugas.html">Tugas</a></li>
+                <li><a href="materi.html" class="active">Materi</a></li>
+                <li><a href="jadwal.html">Jadwal</a></li>
+            </ul>
+            <button class="theme-toggle-btn" id="themeToggle">
+                <span class="material-symbols-rounded" id="themeIcon" style="font-size: 18px;">dark_mode</span>
+                <span id="themeText">DARK</span>
+            </button>
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>Arsip Materi Pembelajaran</h1>
+        <p>Konten di halaman ini masih dalam tahap penyusunan dan mungkin belum lengkap sepenuhnya. Materi akan diperbarui secara berkala seiring berjalannya proses pengembangan web ini.</p> <span class="filter-label" style="margin-top: 10px;">(Khusus Kelas 8A)</span></p>
+    </header>
+
+    <div class="container" id="cardContainer">
+        <div class="card">
+            <div><span>Informatika</span><h3>Perkenalan Logika Dasar</h3><p style="color:var(--text-gray); font-size:0.85rem; margin-top:10px; line-height:1.5;">Pengenalan konsep logika algoritma, sintaks dasar Python, dan evaluasi praktik S-NX.</p></div>
+            <a href="materi-lengkap.html?subject=informatika" class="btn-main">Materi Lengkap</a>
+        </div>
+        <div class="card">
+            <div><span>Matematika</span><h3>Persamaan Kuadrat</h3><p style="color:var(--text-gray); font-size:0.85rem; margin-top:10px; line-height:1.5;">Metode pemfaktoran sistematis dan penggunaan rumus ABC untuk pemecahan masalah.</p></div>
+            <a href="materi-lengkap.html?subject=matematika" class="btn-main">Materi Lengkap</a>
+        </div>
+        <div class="card">
+            <div><span>Bahasa Inggris</span><h3>Tenses & Structure</h3><p style="color:var(--text-gray); font-size:0.85rem; margin-top:10px; line-height:1.5;">Review mendalam penggunaan present, past, dan future tenses dalam komunikasi.</p></div>
+            <a href="#" class="btn-main">Materi Lengkap</a>
+        </div>
+        <div class="card">
+            <div><span>IPS</span><h3>Geografi Regional</h3><p style="color:var(--text-gray); font-size:0.85rem; margin-top:10px; line-height:1.5;">Analisis bentang alam dan keragaman sosial budaya regional untuk evaluasi akademik.</p></div>
+            <a href="#" class="btn-main">Materi Lengkap</a>
+        </div>
+        <div class="card">
+            <div><span>IPA</span><h3>Fisika & Biologi</h3><p style="color:var(--text-gray); font-size:0.85rem; margin-top:10px; line-height:1.5;">Konsep gerak gaya dan sistem reproduksi tumbuhan/hewan. Modul persiapan ujian.</p></div>
+            <a href="#" class="btn-main">Materi Lengkap</a>
+        </div>
+        <div class="card">
+            <div><span>Prakarya</span><h3>Kerajinan Bahan Keras</h3><p style="color:var(--text-gray); font-size:0.85rem; margin-top:10px; line-height:1.5;">Teknik pengolahan bahan keras alami dan buatan untuk tugas proyek semester S-NX.</p></div>
+            <a href="#" class="btn-main">Materi Lengkap</a>
+        </div>
+    </div>
+
+    <footer><p>&copy; 2026 <a href="info.html" class="secret-link">Sthenos Nyx</a>. All Rights Reserved.</p></footer>
+
+    <script>
+        const themeBtn = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+
+        function updateUI(theme) {
+            if (theme === 'light') {
+                document.body.setAttribute('data-theme', 'light');
+                if (themeIcon) themeIcon.innerText = "light_mode";
+                if (themeText) themeText.innerText = "LIGHT";
+            } else {
+                document.body.removeAttribute('data-theme');
+                if (themeIcon) themeIcon.innerText = "dark_mode";
+                if (themeText) themeText.innerText = "DARK";
+            }
+        }
+
+        updateUI(localStorage.getItem('theme') || 'dark');
+
+        if (themeBtn) {
+            themeBtn.addEventListener('click', () => {
+                const newTheme = document.body.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+                localStorage.setItem('theme', newTheme);
+                updateUI(newTheme);
+                themeIcon.style.transition = "0.4s";
+                themeIcon.style.transform = "rotate(360deg)";
+                setTimeout(() => { themeIcon.style.transform = "rotate(0deg)"; }, 400);
+            });
+        }
+
+        const cards = document.querySelectorAll('.card');
+        cards.forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+                card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+            });
+        });
+
+        // --- LOGIKA HAMBURGER MOBILE (FIXED) ---
+        function initMobileMenu() {
+            const mobileBtn = document.getElementById('mobile-menu');
+            const navList = document.getElementById('nav-list');
+            
+            if(mobileBtn && navList) {
+                mobileBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    navList.classList.toggle('active');
+                });
+
+                document.addEventListener('click', (e) => {
+                    if (!navList.contains(e.target) && !mobileBtn.contains(e.target) && navList.classList.contains('active')) {
+                        navList.classList.remove('active');
+                    }
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', initMobileMenu);
+    </script>
+</body>
+</html>
