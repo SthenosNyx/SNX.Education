@@ -153,6 +153,28 @@
         .task-card:nth-child(4), .card:nth-child(4) { animation-delay: 0.7s; }
         .task-card:nth-child(5), .card:nth-child(5) { animation-delay: 0.8s; }
         .task-card:nth-child(6), .card:nth-child(6) { animation-delay: 0.9s; }
+
+        /* Tambahkan ini untuk mencegah bocor ke samping */
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+        }
+        
+        /* Update sidebar sedikit agar lebih aman */
+        @media (max-width: 768px) {
+            .sidebar {
+                /* Ganti left: -100% menjadi width statis agar browser tidak bingung */
+                left: -280px; 
+                width: 280px;
+                visibility: hidden; /* Sembunyikan total saat tidak aktif */
+            }
+            
+            .sidebar.active {
+                left: 0;
+                visibility: visible;
+            }
+        }
     </style>
 </head>
 <body data-theme="dark">
