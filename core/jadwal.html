@@ -11,24 +11,20 @@
         /* --- S-NX CSS Variables --- */
         :root { 
             --bg-color: #000; 
-            --card-bg: #0a0a0a; 
-            --primary-red: #5C5CFF; /* Pakai biru terang di sini agar teks terbaca di mode gelap */
-            --border-color: rgba(255, 255, 255, 0.15); 
+            --card-bg: #0a0a0a; /* Background kotak kalender (Gelap) */
+            --primary-red: #5C5CFF; /* Biru terang untuk Dark Mode */
+            --border-color: rgba(255, 255, 255, 0.1); 
             --text-main: #fff; 
-            --text-gray: #a0a0a0; 
-            --nav-bg: rgba(0, 0, 0, 0.8); 
-            --glow-color: rgba(92, 92, 255, 0.45); /* Cahaya biru navy terang untuk mode gelap */
+            --glow-color: rgba(92, 92, 255, 0.3); /* Cahaya hover */
         }
-
+        
         [data-theme="light"] { 
             --bg-color: #f4f4f5; 
-            --card-bg: #fff; 
-            --primary-red: #010066; /* Pakai Navy gelap di sini agar kontras dengan putih di mode terang */
-            --border-color: rgba(0, 0, 0, 0.1); 
+            --card-bg: #ffffff; /* Background kotak kalender (Terang) */
+            --primary-red: #010066; /* Navy pekat untuk Light Mode */
+            --border-color: rgba(0, 0, 0, 0.08); 
             --text-main: #111; 
-            --text-gray: #666; 
-            --nav-bg: rgba(244, 244, 245, 0.9); 
-            --glow-color: rgba(1, 0, 102, 0.15); /* Cahaya biru navy gelap untuk mode terang */
+            --glow-color: rgba(1, 0, 102, 0.1); /* Cahaya hover halus */
         }
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -145,7 +141,10 @@
         .day-cell:hover::before { opacity: 1; }
 
         .day-cell:hover { border-color: var(--primary-red); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        .day-cell.today { border: 2px solid var(--primary-red); background: rgba(255, 0, 0, 0.02); }
+        .day-cell.today { 
+            border: 2px solid var(--primary-red) !important; 
+            background: var(--card-bg); /* Tetap pakai warna kartu, jangan merah */
+        }
         
         .day-number { 
             position: relative; z-index: 1; /* Add this */
@@ -157,16 +156,14 @@
         .today .day-number { color: var(--primary-red); }
         
         .event-tag { 
-            position: relative; z-index: 1; /* Add this */
-            background: rgba(255, 0, 0, 0.1); 
+            background: rgba(1, 0, 102, 0.05); /* Biru sangat transparan */
             color: var(--primary-red); 
-            font-size: 0.65rem; 
-            font-weight: 700; 
-            padding: 6px 10px; 
-            border-radius: 6px; 
-            border-left: 3px solid var(--primary-red); 
-            margin-bottom: 5px; 
-            line-height: 1.3; 
+            border-left: 3px solid var(--primary-red);
+            font-weight: 700;
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-size: 0.65rem;
+        }
         }
         .event-tag.past-event { background: transparent; border: 1px dashed var(--border-color); color: var(--text-gray); opacity: 0.5; border-left: 1px dashed var(--border-color); }
 
