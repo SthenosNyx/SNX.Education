@@ -3,388 +3,200 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>S-NX × EDU - Materi Lengkap</title>
+    <title>S-NX × EDU</title>
     <style>
-        /* =========================================
-           BASE & TYPOGRAPHY
-        ========================================= */
-        :root {
-            --bg-color: #F8F9FA;
-            --text-main: #1A1A1A;
-            --text-muted: #6C757D;
-            --accent-color: #000080; /* Dark Blue from screenshots */
-            --accent-hover: #000050;
-            --sidebar-bg: #FFFFFF;
-            --border-color: #E9ECEF;
-            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* Reset & Base */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            font-family: var(--font-family);
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            overflow-x: hidden;
-            line-height: 1.6;
+            font-family: sans-serif; /* Mengikuti font bawaan user */
+            background-color: #ffffff;
+            color: #000000;
+            line-height: 1.5;
         }
 
-        /* Custom Scrollbar minimalis */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        ::-webkit-scrollbar-thumb {
-            background-color: #CCCCCC;
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background-color: #AAAAAA;
-        }
+        /* Scrollbar Minimalis (Mengatasi keluhan scrollbar kasar) */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-thumb { background: #d1d1d1; border-radius: 10px; }
 
-        /* =========================================
-           HEADER (TOPBAR)
-        ========================================= */
-        .topbar {
-            position: sticky;
-            top: 0;
+        /* Header - Perbaikan Overlap */
+        header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.2rem 2rem;
-            background-color: var(--bg-color);
-            border-bottom: 1px solid var(--border-color);
-            z-index: 90;
-        }
-
-        .brand-logo {
-            font-weight: 700;
-            font-size: 1.1rem;
-            letter-spacing: 2px;
-        }
-
-        .btn-back {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--text-main);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            padding: 8px 16px;
-            border-radius: 20px;
-            transition: background 0.2s;
-        }
-
-        .btn-back:hover {
-            background-color: #E2E6EA;
-        }
-
-        /* =========================================
-           LAYOUT UTAMA & SIDEBAR
-        ========================================= */
-        .layout-wrapper {
-            display: flex;
-            min-height: calc(100vh - 70px);
-        }
-
-        .sidebar {
-            width: 280px;
-            background-color: var(--sidebar-bg);
-            border-right: 1px solid var(--border-color);
-            padding: 2rem 1.5rem;
-            height: calc(100vh - 70px);
+            padding: 15px 5%;
+            border-bottom: 1px solid #eeeeee;
             position: sticky;
-            top: 70px;
+            top: 0;
+            background: #fff;
+            z-index: 100;
+        }
+
+        .logo { font-weight: bold; letter-spacing: 1px; }
+
+        .back-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #000;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Layout Container */
+        .container {
+            display: grid;
+            grid-template-columns: 280px 1fr; /* Sidebar tetap di kiri */
+            min-height: 100vh;
+        }
+
+        /* Sidebar - Tetap di jalurnya, tidak menimpa konten */
+        aside {
+            border-right: 1px solid #eeeeee;
+            padding: 30px 20px;
+            height: calc(100vh - 60px);
+            position: sticky;
+            top: 60px;
             overflow-y: auto;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #fff;
         }
 
-        .sidebar-section {
-            margin-bottom: 2rem;
+        .menu-group { margin-bottom: 25px; }
+        .menu-title { 
+            font-weight: bold; 
+            margin-bottom: 10px; 
+            display: flex; 
+            justify-content: space-between; 
+        }
+        
+        .menu-list { list-style: none; padding-left: 10px; }
+        .menu-list li { margin-bottom: 8px; }
+        .menu-list a { 
+            text-decoration: none; 
+            color: #666; 
+            font-size: 14px; 
+        }
+        .menu-list a.active { color: #000080; font-weight: bold; }
+
+        /* Konten Utama */
+        main {
+            padding: 40px 5%;
+            max-width: 800px;
         }
 
-        .sidebar-title {
-            font-size: 1rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-        }
-
-        .sidebar-list {
-            list-style: none;
-        }
-
-        .sidebar-list li {
-            margin-bottom: 0.8rem;
-        }
-
-        .sidebar-list a {
-            text-decoration: none;
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            display: block;
-            padding-left: 1rem;
-            transition: color 0.2s;
-        }
-
-        .sidebar-list a:hover,
-        .sidebar-list a.active {
-            color: var(--accent-color);
-            font-weight: 600;
-            border-left: 2px solid var(--accent-color);
-            padding-left: calc(1rem - 2px);
-        }
-
-        /* =========================================
-           KONTEN UTAMA (MAIN)
-        ========================================= */
-        .content {
-            flex: 1;
-            padding: 3rem 4rem;
-            max-width: 900px;
-        }
-
-        .content h1 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
-        }
-
-        .content p {
-            font-size: 1.05rem;
-            color: #4A4A4A;
-            margin-bottom: 2rem;
-        }
-
+        .hero-title { font-size: 32px; margin-bottom: 20px; }
+        
         .quote-box {
-            border-left: 4px solid var(--accent-color);
-            padding: 1rem 1.5rem;
-            margin: 2rem 0;
-            background-color: #FFFFFF;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-            border-radius: 0 8px 8px 0;
+            border-left: 3px solid #000080;
+            padding: 15px 20px;
+            margin: 25px 0;
+            background: #f9f9f9;
         }
 
-        .quote-text {
-            font-style: italic;
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .quote-author {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-
-        .section-title {
-            font-size: 1.5rem;
-            color: var(--accent-color);
-            margin-bottom: 1rem;
-            margin-top: 3rem;
-        }
-
-        /* =========================================
-           FAB (FLOATING ACTION BUTTON) MOBILE
-        ========================================= */
-        .fab-menu {
+        /* Floating Button (Hanya muncul di mobile) */
+        .mobile-toggle {
             display: none;
             position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 56px;
-            height: 56px;
-            background-color: var(--accent-color);
-            color: white;
-            border: none;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: #000080;
+            color: #fff;
             border-radius: 50%;
-            box-shadow: 0 4px 12px rgba(0, 0, 128, 0.3);
-            cursor: pointer;
-            z-index: 1000;
-            align-items: center;
+            border: none;
             justify-content: center;
-            transition: transform 0.2s, background-color 0.2s;
-        }
-
-        .fab-menu:active {
-            transform: scale(0.95);
-        }
-
-        /* Overlay untuk mobile saat sidebar terbuka */
-        .sidebar-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.5);
-            z-index: 95;
-            opacity: 0;
-            transition: opacity 0.3s;
+            align-items: center;
+            cursor: pointer;
+            z-index: 200;
         }
 
         /* =========================================
-           RESPONSIVE BREAKPOINTS
+           RESPONSIVE - SOLUSI LAPTOP/TABLET
         ========================================= */
-        /* LAPTOP KECIL / TABLET (Mencegah overlapping layout) */
+        
+        /* Untuk Tablet & Laptop Kecil (Mencegah Sidebar menimpa teks) */
         @media (max-width: 1024px) {
-            .content {
-                padding: 2rem;
+            .container {
+                grid-template-columns: 240px 1fr; /* Memperkecil sidebar agar konten lega */
             }
+            main { padding: 40px 30px; }
         }
 
-        /* TABLET PORTRAIT / MOBILE (Mengaktifkan Off-canvas Sidebar) */
-        @media (max-width: 850px) {
-            .topbar {
-                padding: 1rem 1.5rem;
+        /* Untuk Mobile */
+        @media (max-width: 768px) {
+            header { padding: 15px 20px; }
+            
+            .container {
+                display: block; /* Stack layout */
             }
 
-            .brand-logo {
-                font-size: 1rem;
-            }
-
-            .btn-back span {
-                display: none; /* Sembunyikan teks "Kembali ke Katalog", sisa icon saja jika mau */
-            }
-
-            .fab-menu {
-                display: flex;
-            }
-
-            .sidebar {
+            aside {
                 position: fixed;
+                left: -100%; /* Sembunyikan ke kiri */
                 top: 0;
-                left: 0;
+                width: 280px;
                 height: 100vh;
-                z-index: 100;
-                transform: translateX(-100%); /* Sembunyikan ke kiri */
-                box-shadow: 4px 0 15px rgba(0,0,0,0.05);
+                z-index: 150;
+                transition: 0.3s;
+                box-shadow: 5px 0 15px rgba(0,0,0,0.1);
             }
 
-            /* Class tambahan via JavaScript */
-            .sidebar.active {
-                transform: translateX(0);
-            }
+            aside.open { left: 0; }
 
-            .sidebar-overlay.active {
-                display: block;
-                opacity: 1;
-            }
+            .mobile-toggle { display: flex; }
+            
+            main { padding: 30px 20px; }
+            
+            /* Pastikan teks tidak tabrakan di header mobile */
+            .back-link span { font-size: 12px; }
         }
     </style>
 </head>
 <body>
 
-    <header class="topbar">
-        <div class="brand-logo">S-NX × EDU</div>
-        <a href="#" class="btn-back">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="19" y1="12" x2="5" y2="12"></line>
-                <polyline points="12 19 5 12 12 5"></polyline>
-            </svg>
-            <span class="btn-text">Kembali ke Katalog</span>
+    <header>
+        <div class="logo">S-NX × EDU</div>
+        <a href="#" class="back-link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 5px;"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            <span>Kembali ke Katalog</span>
         </a>
     </header>
 
-    <div class="sidebar-overlay" id="overlay"></div>
-
-    <div class="layout-wrapper">
-        <aside class="sidebar" id="sidebar">
-            <div class="sidebar-section">
-                <div class="sidebar-title">
-                    Informatika
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"></polyline></svg>
-                </div>
-                <ul class="sidebar-list">
+    <div class="container">
+        <aside id="sidebar">
+            <div class="menu-group">
+                <div class="menu-title">Informatika <span>^</span></div>
+                <ul class="menu-list">
                     <li><a href="#" class="active">Bab 1: Logika Dasar</a></li>
                     <li><a href="#">Bab 2: Sintaks Python</a></li>
                     <li><a href="#">Bab 3: Evaluasi Proyek S-NX</a></li>
                 </ul>
             </div>
+            </aside>
 
-            <div class="sidebar-section">
-                <div class="sidebar-title">
-                    Matematika
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                </div>
-                <ul class="sidebar-list">
-                    <li><a href="#">Bab 1: Pemfaktoran</a></li>
-                    <li><a href="#">Bab 2: Rumus ABC</a></li>
-                </ul>
-            </div>
-
-            <div class="sidebar-section">
-                <div class="sidebar-title">
-                    Bahasa Inggris
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                </div>
-                <ul class="sidebar-list">
-                    <li><a href="#">Bab 1: Tenses</a></li>
-                </ul>
-            </div>
-        </aside>
-
-        <main class="content">
-            <h1>Materi Lengkap</h1>
+        <main>
+            <h1 class="hero-title">Materi Lengkap</h1>
             <p>Selamat datang di sesi belajar S-NX terpadu. Silakan gunakan sidebar di sebelah kiri untuk menavigasi daftar bab berdasarkan mata pelajaran yang Anda pilih.</p>
 
             <div class="quote-box">
-                <div class="quote-text">"Disiplin adalah jembatan antara tujuan dan pencapaian."</div>
-                <div class="quote-author">© Sthenos Nyx × Education</div>
+                <p><i>"Disiplin adalah jembatan antara tujuan dan pencapaian."</i></p>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">© Sthenos Nyx × Education</p>
             </div>
 
-            <h2 class="section-title">Panduan Penggunaan</h2>
+            <h2 style="margin-top: 30px;">Panduan Penggunaan</h2>
             <p>Portal ini dirancang secara minimalis untuk memaksimalkan fokus membaca Anda. Pilih salah satu kategori modul pada sidebar kiri untuk memunculkan daftar bab mendetail.</p>
-            <p>Jika Anda berada dalam mode mobile, gunakan tombol di sudut kanan bawah untuk membuka dan menutup daftar isi. Lebar sidebar sudah disesuaikan agar Anda tidak sepenuhnya kehilangan konteks area membaca ini.</p>
         </main>
     </div>
 
-    <button class="fab-menu" id="fabMenu">
-        <svg id="fabIcon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-        </svg>
+    <button class="mobile-toggle" onclick="toggleSidebar()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
     </button>
 
     <script>
-        const fabMenu = document.getElementById('fabMenu');
-        const sidebar = document.getElementById('sidebar');
-        const overlay = document.getElementById('overlay');
-        const fabIcon = document.getElementById('fabIcon');
-
-        // SVG untuk Icon Silang (Tutup)
-        const closeIcon = '<line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>';
-        // SVG untuk Icon Buku (Buka)
-        const bookIcon = '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>';
-
         function toggleSidebar() {
-            const isActive = sidebar.classList.toggle('active');
-            overlay.classList.toggle('active');
-            
-            // Animasi ganti ikon FAB
-            if (isActive) {
-                fabIcon.innerHTML = closeIcon;
-            } else {
-                fabIcon.innerHTML = bookIcon;
-            }
+            document.getElementById('sidebar').classList.toggle('open');
         }
-
-        fabMenu.addEventListener('click', toggleSidebar);
-        
-        // Menutup sidebar jika pengguna menekan area gelap di luarnya
-        overlay.addEventListener('click', toggleSidebar);
     </script>
 
 </body>
