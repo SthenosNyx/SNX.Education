@@ -7,7 +7,7 @@ We will continue to update the system in accordance with user complaints and wil
 ### Advanced Structural Architecture and Layout Stability
 
 #### Elimination of Viewport Displacement
-- User Feedback: "We received critical reports regarding a technical visual bug where a black void or empty dead space appeared on the left flank of the interface whenever the sidebar was toggled on specific device viewports."
+- User Feedback: We received critical reports regarding a technical visual bug where a black void or empty dead space appeared on the left flank of the interface whenever the sidebar was toggled on specific device viewports.
 - Technical Solution: The investigation revealed a rendering conflict within the CSS stacking context, specifically between fixed positioning and parent-level hardware-accelerated transformations. To resolve this, we performed a complete decoupling of the DOM structure. The Sidebar component has been moved to a top-level independent layer, separate from the Main Content wrapper. This structural shift ensures that the viewport remains fully saturated with brand-consistent backgrounds, effectively eliminating layout drift and maintaining a stable 1:1 visual ratio across all modern browsers and screen resolutions.
 
 #### Optimization of Interactive Layers
@@ -20,7 +20,7 @@ We will continue to update the system in accordance with user complaints and wil
 ### Mobile Navigation Synchronicity and Accessibility
 
 #### Synchronized Push Mechanic
-- User Feedback: "Users reported that the global navigation header and the critical 'Back to Catalog' link became obscured or completely inaccessible when the navigation drawer was expanded on mobile devices, disrupting the user journey."
+- User Feedback: Users reported that the global navigation header and the critical 'Back to Catalog' link became obscured or completely inaccessible when the navigation drawer was expanded on mobile devices, disrupting the user journey.
 - Technical Solution: We engineered a Unified Synchronized Push system. Rather than having the sidebar slide *over* the content, the entire interface architecture—including the sticky top navigation and backdrop filters—now shifts programmatically in tandem with the sidebar’s entry animation. By utilizing a standardized cubic-bezier transition curve (0.4, 0, 0.2, 1), we have ensured that all interactive controls remain visible and functional at all times, maintaining 100% UI discoverability and frictionless navigation flow.
 
 #### Touch Interface Refinement
@@ -33,7 +33,7 @@ We will continue to update the system in accordance with user complaints and wil
 ### Foundation of Visual Identity and Readability
 
 #### Material Depth and Background Integrity
-- User Feedback: "Initial feedback from early testers indicated that the navigation sidebar appeared ghostly or semi-transparent, causing sidebar links to overlap visually with the primary article content, which severely hindered readability and professional appeal."
+- User Feedback: Initial feedback from early testers indicated that the navigation sidebar appeared ghostly or semi-transparent, causing sidebar links to overlap visually with the primary article content, which severely hindered readability and professional appeal.
 - Technical Solution: We reinforced the core CSS variable inheritance for the side-background property across the entire stylesheet. The sidebar was upgraded from a transparent state to a high-opacity solid hex value (Deep Charcoal for Dark Mode and Pure White for Light Mode). This creates a distinct "Material Depth," establishing a clear visual boundary between the navigation layer and the content layer. This improvement adheres to the S-NX minimalist design standards, ensuring that typography remains sharp and legible regardless of the density of the underlying educational material.
 
 #### Typography and Branding Initialization
