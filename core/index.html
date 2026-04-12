@@ -5,163 +5,105 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="https://i.ibb.co.com/DfCjtjDg/LOGO-HEADER.png">
     <title>S-Edu | Welcome</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root { 
             --bg-color: #000; 
-            --card-bg: #0a0a0a; 
-            --primary-red: #5C5CFF; /* Ganti jadi Navy Blue */
-            --border-color: rgba(255, 255, 255, 0.15); 
+            --primary-color: #5C5CFF; /* Biru terang untuk dark mode */
             --text-main: #fff; 
             --text-gray: #a0a0a0; 
-            --nav-bg: rgba(0, 0, 0, 0.8); 
+            --border-color: rgba(255, 255, 255, 0.15);
         }
-
         [data-theme="light"] { 
             --bg-color: #f4f4f5; 
-            --card-bg: #fff; 
-            --primary-red: #010066; /* Tetap Navy Blue atau bisa agak diterangkan sedikit */
-            --border-color: rgba(0, 0, 0, 0.1); 
+            --primary-color: #010066; /* Navy pekat untuk light mode */
             --text-main: #111; 
             --text-gray: #666; 
-            --nav-bg: rgba(244, 244, 245, 0.9); 
+            --border-color: rgba(0, 0, 0, 0.1);
         }
-        
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
-            background-color: var(--bg); 
-            color: var(--text); 
-            font-family: 'Montserrat', sans-serif;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            overflow: hidden;
-            text-align: center;
+            background-color: var(--bg-color); color: var(--text-main); 
+            font-family: 'Montserrat', sans-serif; 
+            height: 100vh; display: flex; flex-direction: column; 
+            justify-content: center; align-items: center; text-align: center; 
+            overflow: hidden; transition: 0.4s; padding: 20px;
         }
 
-        /* Container Utama */
-        .welcome-container { padding: 0 20px; }
+        .logo-text { 
+            font-size: 3.5rem; font-weight: 800; letter-spacing: 4px; 
+            margin-bottom: 5px; text-transform: uppercase;
+        }
+        .sub-logo { 
+            font-size: 0.85rem; font-weight: 600; letter-spacing: 6px; 
+            color: var(--text-gray); margin-bottom: 30px; text-transform: uppercase;
+        }
 
-        /* Animasi Logo */
-        .logo-big { 
-            font-size: 3rem; 
+        .desc { 
+            max-width: 650px; color: var(--text-gray); line-height: 1.8; 
+            margin-bottom: 50px; font-size: 1rem;
+        }
+        /* Sorotan Teks Biru */
+        .desc strong { color: var(--primary-color); font-weight: 700; }
+
+        /* Style Tombol Masuk yang Diperbaiki */
+        .btn-enter { 
+            text-decoration: none; 
+            color: var(--text-main); 
             font-weight: 700; 
-            letter-spacing: 5px; 
-            margin-bottom: 5px;
-            animation: fadeIn 1.5s ease;
-        }
-        .logo-big span { color: var(--red); }
-        
-        .subtitle { 
-            color: var(--red); 
-            font-size: 0.75rem; 
-            letter-spacing: 4px; 
+            font-size: 1rem; 
+            letter-spacing: 2px; 
             text-transform: uppercase; 
-            font-weight: 700;
-            margin-bottom: 30px;
-            opacity: 0;
-            animation: fadeIn 1s ease forwards;
-            animation-delay: 0.4s;
+            padding: 16px 40px; 
+            border: 1px solid var(--border-color); 
+            border-radius: 50px; 
+            background: transparent;
+            transition: all 0.4s ease;
+            position: relative;
         }
 
-        /* Deskripsi 2 Baris */
-        .description {
-            color: var(--text-gray);
-            font-size: 0.85rem;
-            line-height: 1.8;
-            max-width: 550px;
-            margin: 0 auto 40px;
-            opacity: 0;
-            animation: fadeUp 1s ease forwards;
-            animation-delay: 0.8s;
+        /* Hover Glow Navy */
+        .btn-enter:hover { 
+            border-color: var(--primary-color); 
+            background: rgba(1, 0, 102, 0.05); /* Transparan navy */
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(1, 0, 102, 0.2); /* Shadow navy */
+            color: var(--primary-color);
         }
 
-        /* Tombol Masuk */
-        .enter-btn {
-            text-decoration: none;
-            color: var(--text);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 14px 45px;
-            border-radius: 50px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 4px;
-            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            display: inline-block;
-            opacity: 0;
-            animation: fadeUp 1s ease forwards;
-            animation-delay: 1.2s;
+        @media (max-width: 600px) {
+            .logo-text { font-size: 2.2rem; }
+            .sub-logo { font-size: 0.6rem; letter-spacing: 4px; }
+            .desc { font-size: 0.9rem; margin-bottom: 40px; }
         }
 
-        .enter-btn:hover {
-            border-color: var(--red);
-            box-shadow: 0 0 25px rgba(255, 0, 0, 0.3);
-            background: rgba(255, 0, 0, 0.05);
-            transform: scale(1.05);
-        }
-
-        /* Keyframes Animasi */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        /* Styling Tombol Menu */
-        .menu-btn {
-            display: none;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-main);
-            background: none;
-            border: none;
-            cursor: pointer;
-        }
-
-        @media (max-width: 768px) {
-            .menu-btn { display: flex; }
-            
-            /* Sidebar mobile mode */
-            .sidebar {
-                position: fixed;
-                left: -100%; /* Sembunyi di kiri */
-                top: 0;
-                bottom: 0;
-                width: 280px;
-                z-index: 99999;
-                transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            }
-            
-            .sidebar.active {
-                left: 0; /* Muncul saat aktif */
-                box-shadow: 20px 0 50px rgba(0,0,0,0.5);
-            }
-        }
+        /* Animasi Masuk */
+        .fade-in { opacity: 0; animation: fadeIn 1s forwards cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } from { opacity: 0; transform: translateY(20px); } }
     </style>
 </head>
-<body>
+<body data-theme="dark">
 
-    <div class="welcome-container">
-        <div class="logo-big">S-NX<span> EDUCATION</span></div>
-        <div class="subtitle">Ibnul Qayyim Islamic School</div>
-        
-        <p class="description">
-            Wadah praktis untuk mengakses tugas, materi, dan jadwal kelas dalam satu pintu.
-            Dilengkapi fitur simpan tema otomatis dan arsip jadwal agar belajar lebih teratur.
-        </p>
+    <div class="logo-text fade-in">S-NX EDUCATION</div>
+    <div class="sub-logo fade-in delay-1">Ibnul Qayyim Islamic School</div>
+    
+    <p class="desc fade-in delay-2">
+        Wadah praktis untuk mengakses <strong>tugas</strong>, <strong>materi</strong>, dan <strong>jadwal kelas</strong> dalam satu pintu. Dilengkapi fitur simpan tema otomatis dan arsip jadwal agar belajar lebih teratur.
+    </p>
 
-        <a href="tugas.html" class="enter-btn">MASUK</a>
-    </div>
+    <a href="tugas.html" class="btn-enter fade-in delay-3">Masuk</a>
 
     <script>
-        const currentSavedTheme = localStorage.getItem('theme');
-        if (!currentSavedTheme) {
-            localStorage.setItem('theme', 'dark');
+        // Deteksi tema yang disimpan sebelumnya
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        if (savedTheme === 'light') {
+            document.body.setAttribute('data-theme', 'light');
+        } else {
+            document.body.removeAttribute('data-theme');
         }
     </script>
 </body>
