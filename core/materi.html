@@ -31,7 +31,20 @@
         body { background-color: var(--bg-color); color: var(--text-main); font-family: 'Montserrat', sans-serif; min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; transition: 0.4s; }
 
         nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 8%; border-bottom: 1px solid var(--border-color); background: var(--nav-bg); backdrop-filter: blur(20px); position: sticky; top: 0; z-index: 1000; }
-        .logo { font-weight: 700; letter-spacing: 2px; }
+        .logo { 
+            font-weight: 700; 
+            letter-spacing: 2px; 
+            text-decoration: none; /* Menghilangkan garis bawah */
+            color: var(--text-main); /* Mengikuti warna teks utama (Putih/Hitam) */
+            transition: 0.3s;
+            cursor: default; /* Membuat kursor tetap panah, bukan tangan (opsional agar makin rahasia) */
+        }
+        
+        /* Tip: Jika ingin ada sedikit tanda saat di-hover oleh orang yang teliti */
+        .logo:hover {
+            opacity: 0.8;
+            text-shadow: 0 0 10px var(--primary-red); /* Efek glow tipis saat disentuh */
+        }
         .nav-right { display: flex; align-items: center; gap: 20px; }
         .nav-links { display: flex; gap: 30px; list-style: none; }
         .nav-links a { text-decoration: none; color: var(--text-gray); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; transition: 0.3s; }
@@ -105,7 +118,7 @@
 </head>
 <body data-theme="dark">
     <nav>
-        <div class="logo">S-NX × EDU</div>
+        <a href="info.html" class="logo">S-NX × EDU</a>
         <div class="nav-right">
             <ul class="nav-links" id="nav-list">
                 <li><a href="tugas.html">Tugas</a></li>
