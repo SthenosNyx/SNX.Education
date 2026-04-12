@@ -5,7 +5,7 @@
 - **User Feedback:** We received reports regarding a "dead zone" or empty black void appearing on the left side of the screen when the sidebar was toggled on specific viewports.
 - **Solution:** We re-engineered the DOM hierarchy by decoupling the Sidebar component from the Main Content wrapper. By neutralizing the `transform` inheritance conflict, we eliminated the layout displacement bug, ensuring a solid, edge-to-edge visual experience.
 
-## [Version 1.1.5] - 2026-04-10
+## [Version 1.1.5] - 2026-04-11
 ### Enhanced Mobile Navigation
 - **User Feedback:** Users noted that the "Back to Catalog" link and the top navigation bar became inaccessible or were awkwardly obscured when the navigation drawer was active on mobile devices.
 - **Solution:** We implemented a "Synchronized Push" mechanic. The entire viewport—including the sticky header—now shifts programmatically in tandem with the sidebar. This ensures that the global navigation remains visible and interactive, maintaining a frictionless user journey.
