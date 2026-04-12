@@ -27,10 +27,15 @@ The portal is a high-fidelity academic environment custom-built for Ibnul Qayyim
 
 ## Directory Structure
 ```text
-/
-├── vercel.json           (Deployment and Routing Configuration)
-├── index.html            (Primary Dashboard and Task Hub)
-├── materi-lengkap.html   (Optimized Library with Accordion Logic)
-├── jadwal.html           (Advanced Academic Calendar Interface)
-├── info.html             (Project Documentation and Metadata)
-└── /assets               (Assets Galery)
+/ (root)
+├── LICENSE              (Project Licensing)
+├── README.md            (General Project Overview)
+├── RELEASENOTES.md      (Version History and Changelogs)
+├── TUTORIAL-ID.md       (User and Deployment Manual)
+└── /core                (Primary Application Logic)
+    ├── index.html       (Main Landing Page / Gateway)
+    ├── info.html        (Project Metadata and Credits)
+    ├── jadwal.html      (Academic Calendar Interface)
+    ├── materi-lengkap.html (Educational Material with Accordion UI)
+    ├── materi.html      (General Resource Library)
+    └── tugas.html       (Task Management Dashboard)
