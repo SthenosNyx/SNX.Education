@@ -14,7 +14,7 @@
         :root { 
             --bg-color: #000; 
             --card-bg: #0a0a0a; 
-            --primary-red: #5C5CFF; /* Ganti jadi Navy Blue */
+            --primary-red: #5C5CFF; /* Navy Blue untuk Dark Mode */
             --border-color: rgba(255, 255, 255, 0.15); 
             --text-main: #fff; 
             --text-gray: #a0a0a0; 
@@ -24,7 +24,7 @@
         [data-theme="light"] { 
             --bg-color: #f4f4f5; 
             --card-bg: #fff; 
-            --primary-red: #010066; /* Tetap Navy Blue atau bisa agak diterangkan sedikit */
+            --primary-red: #010066; /* Navy Blue Pekat untuk Light Mode */
             --border-color: rgba(0, 0, 0, 0.1); 
             --text-main: #111; 
             --text-gray: #666; 
@@ -92,11 +92,13 @@
             gap: 12px; 
             transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
         }
+
+        /* FIXED HOVER STATE */
         .back-btn:hover { 
             border-color: var(--primary-red); 
-            background: rgba(255, 0, 0, 0.05); 
+            background: #01006612; /* Warna Navy Transparan Sesuai Request */
             transform: translateX(-8px); 
-            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(1, 0, 102, 0.1); /* Shadow Navy Tipis */
         }
 
         footer { text-align: center; padding: 40px; font-size: 0.7rem; color: var(--text-gray); border-top: 1px solid var(--border-color); letter-spacing: 1px; transition: 0.4s; }
@@ -105,7 +107,8 @@
             header h1 { font-size: 1.8rem; }
             main { padding: 40px 5%; }
         }
-        /* --- S-NX ANIMATION INFO --- */
+        
+        /* --- S-NX ANIMATIONS --- */
         @keyframes reveal {
             from { opacity: 0; filter: blur(10px); transform: translateY(30px); }
             to { opacity: 1; filter: blur(0); transform: translateY(0); }
