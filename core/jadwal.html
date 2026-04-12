@@ -8,197 +8,75 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <style>
-        /* --- S-NX CSS Variables --- */
         :root { 
-            --bg-color: #000; 
-            --card-bg: #0a0a0a; /* Background kotak kalender (Gelap) */
-            --primary-red: #5C5CFF; /* Biru terang untuk Dark Mode */
-            --border-color: rgba(255, 255, 255, 0.1); 
-            --text-main: #fff; 
-            --glow-color: rgba(92, 92, 255, 0.3); /* Cahaya hover */
+            --bg-color: #000; --card-bg: #0a0a0a; 
+            --primary-red: #5C5CFF; 
+            --border-color: rgba(255, 255, 255, 0.15); 
+            --text-main: #fff; --text-gray: #a0a0a0; 
+            --nav-bg: rgba(0, 0, 0, 0.8);
+            --mobile-menu-bg: rgba(0, 0, 0, 0.98); /* Solid untuk mobile */
         }
-        
         [data-theme="light"] { 
-            --bg-color: #f4f4f5; 
-            --card-bg: #ffffff; /* Background kotak kalender (Terang) */
-            --primary-red: #010066; /* Navy pekat untuk Light Mode */
-            --border-color: rgba(0, 0, 0, 0.08); 
-            --text-main: #111; 
-            --glow-color: rgba(1, 0, 102, 0.1); /* Cahaya hover halus */
+            --bg-color: #f4f4f5; --card-bg: #fff; 
+            --primary-red: #010066; 
+            --border-color: rgba(0, 0, 0, 0.1); 
+            --text-main: #111; --text-gray: #666; 
+            --nav-bg: rgba(244, 244, 245, 0.9);
+            --mobile-menu-bg: rgba(255, 255, 255, 0.98); /* Solid untuk mobile */
         }
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        html, body {
-            overflow-x: hidden;
-            width: 100%;
-            position: relative;
-        }
+        body { background-color: var(--bg-color); color: var(--text-main); font-family: 'Montserrat', sans-serif; transition: 0.4s; overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column; }
 
-        body { 
-            background-color: var(--bg-color); 
-            color: var(--text-main); 
-            font-family: 'Montserrat', sans-serif; 
-            min-height: 100vh; 
-            display: flex; 
-            flex-direction: column; 
-            transition: background-color 0.4s, color 0.4s; 
-        }
-
-        ::selection { background-color: var(--text-main); color: var(--bg-color); }
-
-        /* --- Navbar --- */
-        nav { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            padding: 20px 8%; 
-            border-bottom: 1px solid var(--border-color); 
-            background: var(--nav-bg); 
-            backdrop-filter: blur(20px); 
-            position: sticky; 
-            top: 0; 
-            z-index: 1000; 
-            transition: 0.4s; 
-        }
-
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 8%; border-bottom: 1px solid var(--border-color); background: var(--nav-bg); backdrop-filter: blur(20px); position: sticky; top: 0; z-index: 1000; }
         .logo { font-weight: 700; letter-spacing: 2px; }
-
         .nav-right { display: flex; align-items: center; gap: 20px; }
-
         .nav-links { display: flex; gap: 30px; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--text-gray); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; }
+        .nav-links a.active { color: var(--primary-red); }
 
-        .nav-links a { 
-            text-decoration: none; 
-            color: var(--text-gray); 
-            font-size: 0.8rem; 
-            font-weight: 600; 
-            text-transform: uppercase; 
-            transition: 0.3s; 
-        }
-
-        .nav-links a.active, .nav-links a:hover { color: var(--primary-red); }
-        
-        .theme-toggle-btn { 
-            background: transparent; 
-            border: 1px solid var(--border-color); 
-            color: var(--text-main); 
-            padding: 8px 20px; 
-            border-radius: 50px; 
-            font-size: 0.7rem; 
-            font-weight: 700; 
-            cursor: pointer; 
-            transition: 0.3s; 
-            font-family: 'Montserrat'; 
-            display: flex; 
-            align-items: center; 
-            gap: 8px; 
-        }
-        .theme-toggle-btn:hover { border-color: var(--primary-red); }
-
+        .theme-toggle-btn { background: transparent; border: 1px solid var(--border-color); color: var(--text-main); padding: 8px 20px; border-radius: 50px; font-size: 0.7rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px; font-family: 'Montserrat'; }
         .menu-toggle { display: none; flex-direction: column; cursor: pointer; gap: 6px; z-index: 1100; }
         .bar { width: 25px; height: 2px; background-color: var(--text-main); transition: 0.4s; border-radius: 2px; }
 
-        /* --- Headline --- */
-        .hero { text-align: left; padding: 60px 8% 20px; max-width: 1200px; margin: 0 auto; opacity: 0; animation: fadeInUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards 0.2s; }
-        .hero h1 { font-size: 2.5rem; font-weight: 700; letter-spacing: -1px; }
-        .hero p { color: var(--text-gray); margin-top: 15px; line-height: 1.8; max-width: 800px; font-size: 0.95rem; }
+        .main-content { max-width: 1200px; margin: 0 auto; padding: 60px 8% 80px; display: flex; flex-direction: column; align-items: flex-start; flex-grow: 1; width: 100%;}
+        .hero { text-align: left; width: 100%; margin-bottom: 50px; }
+        .hero h1 { font-size: 2.8rem; font-weight: 700; letter-spacing: -1.5px; margin-left: -4px; }
+        .hero p { color: var(--text-gray); margin-top: 15px; line-height: 1.8; max-width: 700px; }
 
-        /* --- Calendar Layout --- */
-        .calendar-wrapper { padding: 20px 8% 80px; max-width: 1200px; margin: 0 auto; overflow-x: auto; flex-grow: 1; width: 100%; }
-        .month-year { font-size: 1.5rem; font-weight: 700; color: var(--primary-red); margin-bottom: 30px; text-transform: uppercase; letter-spacing: 1px; opacity: 0; animation: fadeInUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards 0.3s; }
+        .month-year { font-size: 1.6rem; font-weight: 700; color: var(--primary-red); margin-bottom: 25px; text-transform: uppercase; width: 100%; }
 
+        .grid-container { width: 100%; overflow-x: auto; }
         .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 12px; min-width: 700px; }
         .day-label { text-align: center; color: var(--text-gray); font-size: 0.7rem; font-weight: 700; padding-bottom: 15px; border-bottom: 1px solid var(--border-color); }
-        
-        .day-cell { 
-            position: relative; /* Add this for ::before placement */
-            overflow: hidden; /* Add this to contain the gradient */
-            background: var(--card-bg); 
-            border: 1px solid var(--border-color); 
-            aspect-ratio: 1/1; 
-            padding: 12px; 
-            display: flex; 
-            flex-direction: column; 
-            border-radius: 12px; 
-            opacity: 0; 
-            animation: fadeInUp 0.5s forwards; 
-            transition: 0.3s ease; /* Only for theme changes, not hover */
-        }
-        /* Mouse Follow Glow Effect (reintroduced) */
-        .day-cell::before { 
-            content: ""; 
-            position: absolute; 
-            width: 500px; height: 500px; 
-            top: calc(var(--mouse-y, -500px) - 250px); 
-            left: calc(var(--mouse-x, -500px) - 250px); 
-            background: radial-gradient(circle, var(--glow-color) 0%, transparent 70%); 
-            opacity: 0; 
-            transition: opacity 0.5s ease; 
-            pointer-events: none; 
-            z-index: 0; 
-        }
-        .day-cell:hover::before { opacity: 1; }
-
-        .day-cell:hover { border-color: var(--primary-red); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        .day-cell.today { 
-            border: 2px solid var(--primary-red) !important; 
-            background: var(--card-bg); /* Tetap pakai warna kartu, jangan merah */
-        }
-        
-        .day-number { 
-            position: relative; z-index: 1; /* Add this */
-            font-weight: 700; 
-            font-size: 0.9rem; 
-            color: var(--text-gray); 
-            margin-bottom: 10px; 
-        }
+        .day-cell { background: var(--card-bg); border: 1px solid var(--border-color); aspect-ratio: 1/1; padding: 12px; border-radius: 12px; animation: fadeInUp 0.5s forwards; transition: transform 0.3s, border-color 0.3s;}
+        .day-cell:hover { transform: translateY(-5px); border-color: var(--primary-red); }
+        .day-cell.today { border: 2px solid var(--primary-red); }
+        .day-number { font-weight: 700; color: var(--text-gray); }
         .today .day-number { color: var(--primary-red); }
-        
-        .event-tag { 
-            background: #01006612; /* Biru sangat transparan */
-            color: var(--primary-red); 
-            border-left: 3px solid var(--primary-red);
-            font-weight: 700;
-            padding: 6px 10px;
-            border-radius: 4px;
-            font-size: 0.65rem;
-        }
-        }
-        .event-tag.past-event { background: transparent; border: 1px dashed var(--border-color); color: var(--text-gray); opacity: 0.5; border-left: 1px dashed var(--border-color); }
 
-        footer { text-align: center; padding: 30px 0; font-size: 0.75rem; color: var(--text-gray); border-top: 1px solid var(--border-color); font-weight: 600; margin-top: auto; }
-        .secret-link { color: inherit; text-decoration: none; cursor: default; transition: opacity 0.3s ease; }
-        .secret-link:hover { cursor: pointer; text-shadow: 0 0 8px var(--primary-red); }
+        footer { text-align: center; padding: 30px 0; font-size: 0.75rem; color: var(--text-gray); border-top: 1px solid var(--border-color); margin-top: auto;}
 
-        /* --- Mobile Responsive --- */
-        @media (max-width: 768px) { 
-            nav { padding: 20px 5%; } 
-            .menu-toggle { display: flex; } 
-            
-            /* Sidebar Mobile Style */
+        /* --- MOBILE MENU KONSISTEN (SOLID & ANTI BOCOR) --- */
+        @media (max-width: 768px) {
+            nav { padding: 20px 5%; }
+            .menu-toggle { display: flex; }
             .nav-links { 
-                position: fixed; right: -100%; top: 0; flex-direction: column; 
-                background: var(--nav-bg); width: 100%; height: 100vh; 
-                justify-content: center; align-items: center; transition: 0.5s ease; 
-                border-left: 1px solid var(--border-color); z-index: 1050; 
-            } 
-            .nav-links.active { right: 0; } 
-            
-            .hero h1 { font-size: 1.8rem; }
-            .calendar-grid { gap: 6px; }
-            .day-cell { padding: 6px; border-radius: 8px; }
-            .day-number { font-size: 0.75rem; }
-            .event-tag { font-size: 0.55rem; padding: 4px; }
-        }
-
-        @keyframes fadeInUp {
-            0% { opacity: 0; transform: translateY(40px); }
-            100% { opacity: 1; transform: translateY(0); }
+                position: fixed; top: 0; right: 0; width: 70%; max-width: 300px; height: 100vh; 
+                background: var(--mobile-menu-bg); backdrop-filter: blur(10px);
+                flex-direction: column; justify-content: center; align-items: center; 
+                transform: translateX(100%); /* Sembunyi dengan rapi */
+                transition: transform 0.4s ease; z-index: 1050; 
+                border-left: 1px solid var(--border-color);
+            }
+            .nav-links.active { transform: translateX(0); }
+            .main-content { padding: 40px 5% 60px; }
+            .hero h1 { font-size: 2rem; }
         }
     </style>
 </head>
 <body data-theme="dark">
+
     <nav>
         <div class="logo">S-NX × EDU</div>
         <div class="nav-right">
@@ -217,139 +95,62 @@
         </div>
     </nav>
 
-    <header class="hero">
-        <h1>Prediksi Jadwal & Agenda</h1>
-        <p>Halaman ini berisi perkiraan acara mendatang untuk siswa-siswi <strong>IQIS Makassar</strong>. Agenda yang telah terlampaui akan diarsip otomatis (ditandai warna abu-abu). Jadwal bersifat referensi dan dapat berubah.</p>
-    </header>
+    <div class="main-content">
+        <header class="hero">
+            <h1>Prediksi Jadwal & Agenda</h1>
+            <p>Agenda yang telah terlampaui akan diarsip otomatis secara visual.</p>
+        </header>
 
-    <div class="calendar-wrapper">
-        <div class="month-year" id="monthDisplay">LOADING...</div>
-        <div class="calendar-grid" id="calendarGrid">
-            <div class="day-label">MGG</div><div class="day-label">SEN</div><div class="day-label">SEL</div><div class="day-label">RAB</div><div class="day-label">KAM</div><div class="day-label">JUM</div><div class="day-label">SAB</div>
+        <div class="month-year" id="monthDisplay">APRIL 2026</div>
+        
+        <div class="grid-container">
+            <div class="calendar-grid" id="calendarGrid">
+                <div class="day-label">MGG</div><div class="day-label">SEN</div><div class="day-label">SEL</div><div class="day-label">RAB</div><div class="day-label">KAM</div><div class="day-label">JUM</div><div class="day-label">SAB</div>
+            </div>
         </div>
     </div>
 
-    <footer><p>&copy; 2026 <a href="info.html" class="secret-link">Sthenos Nyx</a>. All Rights Reserved.</p></footer>
+    <footer><p>&copy; 2026 Sthenos Nyx. All Rights Reserved.</p></footer>
 
     <script>
-        // === 1. LOGIKA TEMA (Sama dengan materi.html) ===
+        // Tema
         const themeBtn = document.getElementById('themeToggle');
-        const themeIcon = document.getElementById('themeIcon');
-        const themeText = document.getElementById('themeText');
-
         function updateUI(theme) {
-            if (theme === 'light') {
-                document.body.setAttribute('data-theme', 'light');
-                if (themeIcon) themeIcon.innerText = "light_mode";
-                if (themeText) themeText.innerText = "LIGHT";
-            } else {
-                document.body.removeAttribute('data-theme');
-                if (themeIcon) themeIcon.innerText = "dark_mode";
-                if (themeText) themeText.innerText = "DARK";
-            }
+            document.body.setAttribute('data-theme', theme);
+            if(theme === 'dark') document.body.removeAttribute('data-theme');
+            document.getElementById('themeIcon').innerText = theme === 'light' ? 'light_mode' : 'dark_mode';
+            document.getElementById('themeText').innerText = theme === 'light' ? 'LIGHT' : 'DARK';
         }
-
         updateUI(localStorage.getItem('theme') || 'dark');
+        themeBtn.addEventListener('click', () => {
+            const newTheme = document.body.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            localStorage.setItem('theme', newTheme);
+            updateUI(newTheme);
+        });
 
-        if (themeBtn) {
-            themeBtn.addEventListener('click', () => {
-                const newTheme = document.body.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-                localStorage.setItem('theme', newTheme);
-                updateUI(newTheme);
-                // Animasi Putar Ikon
-                themeIcon.style.transition = "0.4s";
-                themeIcon.style.transform = "rotate(360deg)";
-                setTimeout(() => { themeIcon.style.transform = "rotate(0deg)"; }, 400);
-            });
+        // Generate Kalender Sederhana
+        const grid = document.getElementById('calendarGrid');
+        for (let i = 0; i < 3; i++) grid.appendChild(document.createElement('div')); // Offset
+        for (let day = 1; day <= 30; day++) {
+            const cell = document.createElement('div');
+            cell.className = 'day-cell';
+            cell.innerHTML = `<span class="day-number">${day}</span>`;
+            if(day === 11) cell.classList.add('today');
+            grid.appendChild(cell);
         }
 
-        // === 2. SISTEM KALENDER OTOMATIS (unchanged except delays) ===
-        const myEvents = {
-            '2026-04-05': 'Tugas PAI',
-            '2026-04-15': 'Deadline Matematika',
-            '2026-04-20': 'Ujian Praktik 8A'
-        };
-
-        function generateCalendar() {
-            const grid = document.getElementById('calendarGrid');
-            if (!grid) return;
-            
-            const now = new Date();
-            const year = now.getFullYear();
-            const month = now.getMonth();
-            
-            const todayStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
-            const monthNames = ["JANUARI", "FEBRUARI", "MARET", "APRIL", "MEI", "JUNI", "JULI", "AGUSTUS", "SEPTEMBER", "OKTOBER", "NOVEMBER", "DESEMBER"];
-            document.getElementById('monthDisplay').innerText = `${monthNames[month]} ${year}`;
-
-            const firstDay = new Date(year, month, 1).getDay();
-            const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-            for (let i = 0; i < firstDay; i++) {
-                const empty = document.createElement('div');
-                empty.className = 'day-cell'; empty.style.opacity = '0';
-                grid.appendChild(empty);
+        // Mobile Menu Fix
+        const mobileBtn = document.getElementById('mobile-menu');
+        const navList = document.getElementById('nav-list');
+        mobileBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            navList.classList.toggle('active');
+        });
+        document.addEventListener('click', (e) => {
+            if (!navList.contains(e.target) && !mobileBtn.contains(e.target)) {
+                navList.classList.remove('active');
             }
-
-            for (let day = 1; day <= daysInMonth; day++) {
-                const cell = document.createElement('div');
-                cell.className = 'day-cell';
-                
-                // Animasi berurutan untuk setiap tanggal
-                cell.style.animationDelay = `${(day * 0.02) + 0.3}s`;
-
-                const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-                
-                if (dateStr === todayStr) cell.classList.add('today');
-                cell.innerHTML = `<span class="day-number">${day}</span>`;
-
-                if (myEvents[dateStr]) {
-                    const tag = document.createElement('div');
-                    tag.className = 'event-tag';
-                    tag.innerText = myEvents[dateStr];
-                    if (dateStr < todayStr) tag.classList.add('past-event');
-                    cell.appendChild(tag);
-                }
-                grid.appendChild(cell);
-            }
-        }
-        
-        // --- MOUSE FOLLOW GLOW EFFECT (reintroduced) ---
-        function initMouseFollow() {
-            const cells = document.querySelectorAll('.day-cell');
-            cells.forEach(cell => {
-                cell.addEventListener('mousemove', e => {
-                    const rect = cell.getBoundingClientRect();
-                    cell.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
-                    cell.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
-                });
-            });
-        }
-        
-        // Crucial: Need to call initMouseFollow() *after* generating the calendar
-        generateCalendar();
-        initMouseFollow();
-
-        // === 3. LOGIKA HAMBURGER MOBILE ===
-        function initMobileMenu() {
-            const mobileBtn = document.getElementById('mobile-menu');
-            const navList = document.getElementById('nav-list');
-            
-            if(mobileBtn && navList) {
-                mobileBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    navList.classList.toggle('active');
-                });
-
-                document.addEventListener('click', (e) => {
-                    if (!navList.contains(e.target) && !mobileBtn.contains(e.target) && navList.classList.contains('active')) {
-                        navList.classList.remove('active');
-                    }
-                });
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', initMobileMenu);
+        });
     </script>
 </body>
 </html>
