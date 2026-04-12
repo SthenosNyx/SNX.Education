@@ -1,33 +1,34 @@
-# 🚀 Panduan Pengelolaan & Deployment S-Edu Portal
+# S-NX Education | Technical Instructions
 
-Dokumen ini berisi instruksi teknis untuk memperbarui konten materi, jadwal, serta langkah-langkah mempublikasikan website ke internet menggunakan Vercel.
+This document provides comprehensive technical instructions for content synchronization, structural updates, and the deployment workflow for the S-Edu Portal utilizing Vercel's infrastructure.
 
 ---
 
-## 📝 1. Cara Mengupdate Konten Utama
+## 1. Core Content Maintenance
 
-Semua konten utama berada di dalam file HTML masing-masing. Kamu hanya perlu mencari bagian spesifik untuk mengubah teksnya.
+All primary data is stored within the specific HTML modules. Maintenance requires precise modification of the DOM structure to ensure the minimalist S-NX aesthetic remains intact.
 
-### A. Menambah/Mengubah Tugas (`tugas.html`)
-Cari baris yang berisi `class="task-card"`. Untuk menambah tugas baru, salin satu blok `div` tersebut.
-* **Kategori:** Ubah `data-category="umum"` menjadi `agama`, `eksak`, atau `bahasa`.
-* **Judul:** Ganti teks di dalam tag `<h3>`.
-* **Deskripsi:** Ganti teks di dalam tag `<p>`.
-* **Deadline:** Ganti teks di dalam tag `<span>` yang ada di bagian bawah kartu.
+### A. Task Management and Filtering (tugas.html)
+The task dashboard utilizes a card-based system identified by the "task-card" class. To append new assignments, replicate an existing task block while adhering to the following data parameters:
+- **Category Assignment:** Modify the `data-category` attribute. Valid values include "general", "religious", "exact-sciences", or "languages". This is critical for the JavaScript filtering engine.
+- **Header Specification:** Update the text within the `<h3>` tags for the assignment title.
+- **Narrative Content:** Replace the text within the `<p>` tags for the task description.
+- **Temporal Metadata:** Update the deadline information within the `<span>` tag located in the card footer.
 
-### B. Mengupdate Materi Lengkap (`materi-lengkap.html`)
-Halaman ini menggunakan sistem **Accordion**.
-1. **Judul Bab:** Cari elemen dengan class `category-btn`.
-2. **Isi Materi:** Cari `div` dengan class `category-content`. Kamu bisa memasukkan tag HTML seperti:
-   - `<p>...</p>` untuk paragraf.
-   - `<ul><li>...</li></ul>` untuk daftar poin.
-   - `<a href="LINK_FILE">Unduh Materi</a>` untuk lampiran file.
+### B. Educational Material and Accordion Logic (materi-lengkap.html)
+This module employs a high-performance CSS-JS Accordion system. To ensure smooth transitions, follow these structural rules:
+1. **Category Triggers:** Locate elements with the `category-btn` class to update subject headers.
+2. **Content Injection:** Insert data within the `category-content` div. For optimal rendering, utilize the following standard HTML elements:
+   - Paragaphs: Use `<p>` tags for standard descriptions.
+   - List Structures: Use `<ul>` and `<li>` for bulleted technical points.
+   - Attachment Links: Use `<a href="URL" class="nav-item">` for downloadable resources. 
+   - Note: Do not remove the `max-height` logic in the script, as it calculates the scrollHeight dynamically.
 
-### C. Mengatur Jadwal Kalender (`jadwal.html`)
-Scroll ke bagian paling bawah file hingga menemukan tag `<script>`. Cari variabel `const myEvents` dan tambahkan jadwal dengan format berikut:
+### C. Academic Calendar and Event Configuration (jadwal.html)
+The calendar interface is driven by a centralized JavaScript object. Navigate to the script section at the bottom of the file and locate the `myEvents` constant:
 ```javascript
 const myEvents = {
-    '2026-04-15': 'Ujian Akhir Semester',
-    '2026-04-20': 'Libur Idul Fitri',
-    // Tambahkan data baru di sini
+    '2026-04-15': 'Final Semester Examination',
+    '2026-04-20': 'Eid Al-Fitr Break',
+    // Append new chronological data here
 };
