@@ -10,7 +10,7 @@
     <style>
         :root { 
             --bg-color: #000; 
-            --side-bg: #0a0a0a; /* Perbaikan Background Sidebar */
+            --side-bg: #0a0a0a; 
             --primary-blue: #5C5CFF; 
             --border-color: rgba(255, 255, 255, 0.15); 
             --text-main: #fff; 
@@ -19,7 +19,7 @@
         }
         [data-theme="light"] { 
             --bg-color: #f4f4f5; 
-            --side-bg: #fff; /* Perbaikan Background Sidebar */
+            --side-bg: #fff; 
             --primary-blue: #010066; 
             --border-color: rgba(0, 0, 0, 0.1); 
             --text-main: #111; 
@@ -32,42 +32,53 @@
             background-color: var(--bg-color); 
             color: var(--text-main); 
             font-family: 'Montserrat', sans-serif; 
-            overflow-x: hidden; /* Mencegah scroll horizontal saat sidebar geser */
-            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-x: hidden;
+            transition: background 0.4s;
         }
-
-        /* Container untuk push effect */
-        .wrapper { display: flex; width: 100%; transition: transform 0.4s ease; }
 
         /* --- Sidebar --- */
         .sidebar { 
             width: 300px; 
-            min-width: 300px;
             background-color: var(--side-bg); 
             border-right: 1px solid var(--border-color); 
             display: flex; 
             flex-direction: column; 
             height: 100vh;
-            position: sticky;
+            position: fixed; /* Tetap di kiri */
             top: 0;
+            left: 0;
             z-index: 1000;
+            transform: translateX(-100%); /* Sembunyi di kiri luar layar */
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
+
+        /* --- Main Content --- */
+        .main-content { 
+            width: 100%;
+            min-height: 100vh;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Logic Push Effect */
+        body.sidebar-open .sidebar { transform: translateX(0); }
+        body.sidebar-open .main-content { transform: translateX(300px); }
+
+        /* Sidebar Internal Elements */
         .sidebar-header { padding: 25px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; }
         .sidebar-header h2 { font-size: 0.8rem; color: var(--primary-blue); font-weight: 700; letter-spacing: 1px; }
         .logo-small { font-weight: 700; letter-spacing: 1px; font-size: 0.9rem;}
 
         .sidebar-scroll { flex: 1; overflow-y: auto; padding: 10px 0; }
         .category-btn { width: 100%; padding: 15px 25px; background: transparent; border: none; color: var(--text-main); display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-family: 'Montserrat'; font-size: 0.85rem; font-weight: 700; }
-        .category-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; }
+        .category-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; background: rgba(255,255,255,0.02); }
         .nav-item { padding: 12px 45px; display: block; text-decoration: none; color: var(--text-gray); font-size: 0.75rem; border-left: 2px solid transparent; }
-        .nav-item:hover { color: var(--text-main); border-left-color: var(--primary-blue); }
+        .nav-item:hover { color: var(--text-main); border-left-color: var(--primary-blue); background: rgba(92, 92, 255, 0.05); }
 
-        /* --- Main Content --- */
-        .main-content { flex: 1; min-width: 100vw; display: flex; flex-direction: column; }
         .top-nav { 
             padding: 15px 5%; 
             display: flex; 
-            justify-content: space-between; 
             align-items: center; 
             background: var(--nav-bg); 
             backdrop-filter: blur(15px); 
@@ -86,105 +97,109 @@
             align-items: center;
             gap: 8px;
         }
-        .back-link span { font-size: 1.2rem; }
         
-        .reading-area { padding: 50px 8%; max-width: 800px; }
+        .reading-area { padding: 50px 8%; max-width: 900px; margin: 0 auto; }
         .reading-area h1 { font-size: 2.2rem; margin-bottom: 10px; font-weight: 700; }
         .reading-area p { margin-bottom: 20px; color: var(--text-gray); line-height: 1.8; font-size: 0.95rem; }
         
         .quote { background: var(--side-bg); padding: 25px; border-left: 4px solid var(--primary-blue); border-radius: 10px; margin: 30px 0; font-style: italic; font-weight: 600; }
 
-        /* --- Mobile Logic --- */
+        /* Floating Button */
         .sidebar-toggle-fab {
-            display: none;
             position: fixed; bottom: 30px; right: 30px;
             background: var(--primary-blue); color: white; border: none; 
             border-radius: 50%; width: 56px; height: 56px;
-            justify-content: center; align-items: center; cursor: pointer; z-index: 10001;
+            display: flex; justify-content: center; align-items: center; 
+            cursor: pointer; z-index: 10001; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
 
-        @media (max-width: 900px) {
-            .sidebar { position: fixed; left: -300px; }
-            .sidebar-toggle-fab { display: flex; }
-            
-            /* Class ini akan dipicu via JS */
-            body.sidebar-open .wrapper { transform: translateX(300px); }
-            body.sidebar-open .sidebar { left: 0; }
+        /* Desktop Adjustment */
+        @media (min-width: 901px) {
+            .sidebar { transform: translateX(0); }
+            .main-content { margin-left: 300px; width: calc(100% - 300px); }
+            .sidebar-toggle-fab { display: none; }
+            body.sidebar-open .main-content { transform: none; }
         }
     </style>
 </head>
 <body data-theme="dark">
 
-    <div class="wrapper">
-        <aside class="sidebar" id="sidebar">
-            <div class="sidebar-header">
-                <div class="logo-small">S-NX × EDU</div>
-                <h2>DAFTAR ISI</h2>
-            </div>
-            <div class="sidebar-scroll">
-                <div class="category-container">
-                    <button class="category-btn" onclick="ac(this)">Informatika</button>
-                    <div class="category-content">
-                        <a href="#" class="nav-item">Bab 1: Logika Dasar</a>
-                        <a href="#" class="nav-item">Bab 2: Sintaks Python</a>
-                    </div>
-                </div>
-                <div class="category-container">
-                    <button class="category-btn" onclick="ac(this)">Matematika</button>
-                    <div class="category-content">
-                        <a href="#" class="nav-item">Bab 1: Persamaan Kuadrat</a>
-                    </div>
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo-small">S-NX × EDU</div>
+            <h2>DAFTAR ISI</h2>
+        </div>
+        <div class="sidebar-scroll">
+            <div class="category-container">
+                <button class="category-btn" onclick="ac(this)">Informatika <span class="material-symbols-rounded">expand_more</span></button>
+                <div class="category-content">
+                    <a href="#" class="nav-item">Bab 1: Logika Dasar</a>
+                    <a href="#" class="nav-item">Bab 2: Sintaks Python</a>
                 </div>
             </div>
-        </aside>
-
-        <main class="main-content">
-            <nav class="top-nav">
-                <a href="materi.html" class="back-link">
-                    <span class="material-symbols-rounded">arrow_back</span>
-                    Kembali ke Katalog
-                </a>
-            </nav>
-
-            <article class="reading-area">
-                <h1>Materi Lengkap</h1>
-                <p>Silakan gunakan sidebar di sebelah kiri untuk menavigasi daftar bab berdasarkan mata pelajaran yang Anda pilih.</p>
-                <div class="quote">
-                    "Disiplin adalah jembatan antara tujuan dan pencapaian."
-                    <br><span style="font-size: 0.8rem; font-weight: 400;">© Sthenos Nyx × Education</span>
+            <div class="category-container">
+                <button class="category-btn" onclick="ac(this)">Matematika <span class="material-symbols-rounded">expand_more</span></button>
+                <div class="category-content">
+                    <a href="#" class="nav-item">Bab 1: Persamaan Kuadrat</a>
                 </div>
-                <h2>Panduan Penggunaan</h2>
-                <p>Portal ini dirancang secara minimalis untuk memaksimalkan fokus membaca Anda. Pilih salah satu kategori modul pada sidebar kiri untuk memunculkan daftar bab mendetail.</p>
-            </article>
-        </main>
-    </div>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <nav class="top-nav">
+            <a href="materi.html" class="back-link">
+                <span class="material-symbols-rounded">arrow_back</span>
+                Kembali ke Katalog
+            </a>
+        </nav>
+
+        <article class="reading-area">
+            <h1>Materi Lengkap</h1>
+            <p>Selamat datang di sesi belajar S-NX terpadu. Silakan gunakan sidebar untuk menavigasi materi.</p>
+            <div class="quote">
+                "Disiplin adalah jembatan antara tujuan dan pencapaian."
+                <br><span style="font-size: 0.8rem; font-weight: 400; opacity: 0.7;">© Sthenos Nyx × Education</span>
+            </div>
+            <h2>Panduan Penggunaan</h2>
+            <p>Portal ini dirancang secara minimalis untuk memaksimalkan fokus membaca Anda. Jika Anda menggunakan HP, klik tombol buku di pojok kanan bawah untuk membuka menu.</p>
+        </article>
+    </main>
 
     <button class="sidebar-toggle-fab" id="fab-toggle">
         <span class="material-symbols-rounded" id="fab-icon">menu_book</span>
     </button>
 
     <script>
-        // Theme Persistence
+        // Set theme
         document.body.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');
 
-        // Accordion
+        // Accordion function
         function ac(b) {
             let c = b.nextElementSibling;
-            c.style.maxHeight = c.style.maxHeight ? null : c.scrollHeight + "px";
+            const isOpen = c.style.maxHeight;
+            
+            // Close others (optional)
+            document.querySelectorAll('.category-content').forEach(el => el.style.maxHeight = null);
+            
+            c.style.maxHeight = isOpen ? null : c.scrollHeight + "px";
         }
 
-        // Sidebar Toggle with Push Effect
         const fabBtn = document.getElementById('fab-toggle');
         const fabIcon = document.getElementById('fab-icon');
 
-        fabBtn.addEventListener('click', () => {
-            document.body.classList.toggle('sidebar-open');
-            fabIcon.innerText = document.body.classList.contains('sidebar-open') ? "close" : "menu_book";
+        fabBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isOpen = document.body.classList.toggle('sidebar-open');
+            fabIcon.innerText = isOpen ? "close" : "menu_book";
         });
 
-        // Close sidebar when clicking outside
+        // Close when clicking outside on mobile
         document.addEventListener('click', (e) => {
-            if (document.body.classList.contains('sidebar-open') && !document.getElementById('sidebar').contains(e.target) && !fabBtn.contains(e.target)) {
+            if (window.innerWidth <= 900 && 
+                document.body.classList.contains('sidebar-open') && 
+                !document.getElementById('sidebar').contains(e.target) && 
+                !fabBtn.contains(e.target)) {
                 document.body.classList.remove('sidebar-open');
                 fabIcon.innerText = "menu_book";
             }
