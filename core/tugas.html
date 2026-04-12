@@ -8,40 +8,41 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <style>
+        /* --- S-NX SYSTEM VARIABLES --- */
         :root { 
             --bg-color: #000; 
             --card-bg: #0a0a0a; 
-            --primary-red: #5C5CFF; /* Ganti jadi Navy Blue */
+            --primary-red: #5C5CFF; /* Biru Terang untuk Dark Mode */
             --border-color: rgba(255, 255, 255, 0.15); 
             --text-main: #fff; 
             --text-gray: #a0a0a0; 
             --nav-bg: rgba(0, 0, 0, 0.8); 
+            --glow-color: rgba(92, 92, 255, 0.2); /* Glow Navy Lembut */
         }
 
         [data-theme="light"] { 
             --bg-color: #f4f4f5; 
             --card-bg: #fff; 
-            --primary-red: #010066; /* Tetap Navy Blue atau bisa agak diterangkan sedikit */
+            --primary-red: #010066; /* Navy Pekat untuk Light Mode */
             --border-color: rgba(0, 0, 0, 0.1); 
             --text-main: #111; 
             --text-gray: #666; 
             --nav-bg: rgba(244, 244, 245, 0.9); 
+            --glow-color: rgba(1, 0, 102, 0.07); /* Glow Navy Transparan #01006612 */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background-color: var(--bg-color); color: var(--text-main); font-family: 'Montserrat', sans-serif; min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; transition: background-color 0.4s, color 0.4s; }
         ::selection { background-color: var(--text-main); color: var(--bg-color); }
 
-        /* --- Unified Navbar --- */
+        /* --- Navbar --- */
         nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 8%; border-bottom: 1px solid var(--border-color); background: var(--nav-bg); backdrop-filter: blur(20px); position: sticky; top: 0; z-index: 1000; transition: 0.4s; }
         .logo { font-weight: 700; letter-spacing: 2px; }
-        
         .nav-right { display: flex; align-items: center; gap: 20px; }
         .nav-links { display: flex; gap: 30px; list-style: none; }
         .nav-links a { text-decoration: none; color: var(--text-gray); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; transition: 0.3s; }
         .nav-links a.active, .nav-links a:hover { color: var(--primary-red); }
 
-        /* Dark/Light Mode Perfecto */
         .theme-toggle-btn {
             background: transparent; border: 1px solid var(--border-color);
             color: var(--text-main); padding: 8px 20px; border-radius: 50px;
@@ -49,36 +50,42 @@
             transition: 0.3s; font-family: 'Montserrat'; display: flex; align-items: center; gap: 8px;
         }
         .theme-toggle-btn:hover { border-color: var(--primary-red); }
-        .toggle-icon { transition: transform 0.4s; }
 
         .menu-toggle { display: none; flex-direction: column; cursor: pointer; gap: 6px; z-index: 1100; }
         .bar { width: 25px; height: 2px; background-color: var(--text-main); transition: 0.4s; border-radius: 2px; }
 
-        /* Headline & Search */
-        .hero { text-align: center; padding: 60px 8% 20px; }
-        .hero h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: 700; }
+        /* --- Hero Section --- */
+        .hero { text-align: center; padding: 60px 8% 20px; opacity: 0; animation: slideUp 0.8s forwards 0.2s; }
+        .hero h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: 700; letter-spacing: -1px; }
         .hero p { color: var(--text-gray); font-size: 0.95rem; max-width: 600px; margin: 0 auto 30px; line-height: 1.6; }
 
         .search-container { max-width: 600px; margin: 0 auto 25px; }
-        #taskSearch { width: 100%; background: var(--card-bg); border: 1px solid var(--border-color); padding: 18px 30px; border-radius: 50px; color: var(--text-main); font-family: 'Montserrat'; outline: none; transition: 0.3s; }
-        #taskSearch:focus { border-color: var(--primary-red); box-shadow: 0 0 20px rgba(255, 0, 0, 0.1); }
+        #taskSearch { width: 100%; background: var(--card-bg); border: 1px solid var(--border-color); padding: 18px 30px; border-radius: 50px; color: var(--text-main); font-family: 'Montserrat'; outline: none; transition: 0.3s; font-size: 0.9rem; }
+        #taskSearch:focus { border-color: var(--primary-red); box-shadow: 0 0 20px rgba(92, 92, 255, 0.1); }
 
         .filter-label { font-size: 0.7rem; color: var(--text-gray); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; display: block; text-align: center; }
         .filter-group { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; max-width: 900px; margin: 0 auto 40px; }
         .filter-chip { background: transparent; border: 1px solid var(--border-color); color: var(--text-gray); padding: 8px 20px; border-radius: 50px; font-size: 0.75rem; font-weight: 600; cursor: pointer; transition: 0.3s; }
-        .filter-chip:hover, .filter-chip.active { border-color: var(--primary-red); color: var(--text-main); background: rgba(255, 0, 0, 0.05); }
+        .filter-chip:hover, .filter-chip.active { border-color: var(--primary-red); color: var(--text-main); background: rgba(1, 0, 102, 0.05); }
 
         #emptyState { display: none; text-align: center; padding: 80px 0; color: var(--text-gray); font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; }
 
-        /* Task Cards Perfecto */
+        /* --- Task Cards --- */
         .container { padding: 0 8% 60px; display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 30px; flex-grow: 1; }
-        .task-card { background: var(--card-bg); border: 2px solid var(--border-color); border-radius: 30px; display: flex; position: relative; overflow: hidden; transition: 0.4s ease; }
+        .task-card { background: var(--card-bg); border: 2px solid var(--border-color); border-radius: 30px; display: flex; position: relative; overflow: hidden; transition: 0.4s ease; opacity: 0; animation: slideUp 0.8s forwards; }
         .task-card:hover { border-color: var(--primary-red); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
 
-        .task-card::before { content: ""; position: absolute; width: 600px; height: 600px; top: calc(var(--mouse-y, -600px) - 300px); left: calc(var(--mouse-x, -600px) - 300px); background: radial-gradient(circle, var(--glow-color) 0%, transparent 70%); opacity: 0; transition: opacity 0.5s ease; pointer-events: none; z-index: 0; }
+        /* Mouse Follow Effect */
+        .task-card::before { 
+            content: ""; position: absolute; width: 600px; height: 600px; 
+            top: calc(var(--mouse-y, -600px) - 300px); 
+            left: calc(var(--mouse-x, -600px) - 300px); 
+            background: radial-gradient(circle, var(--glow-color) 0%, transparent 70%); 
+            opacity: 0; transition: opacity 0.5s ease; pointer-events: none; z-index: 0; 
+        }
         .task-card:hover::before { opacity: 1; }
 
-        .task-main { flex: 1; display: flex; flex-direction: column; z-index: 1; border-right: 2px solid var(--border-color); }
+        .task-main { flex: 1; display: flex; flex-direction: column; z-index: 1; border-right: 2px solid var(--border-color); background: transparent; }
         .task-header { padding: 25px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; }
         .task-title { font-size: 1.3rem; font-weight: 700; }
         .label { font-size: 0.6rem; border: 1px solid var(--border-color); padding: 5px 15px; border-radius: 50px; text-transform: uppercase; font-weight: 700; color: var(--text-gray); }
@@ -88,7 +95,7 @@
         .see-more { font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: 0.3s; margin-top: auto; text-decoration: none; color: var(--text-main); display: inline-block; position: relative; z-index: 10; }
         .see-more:hover { color: var(--primary-red); }
 
-        .task-sidebar { width: 130px; display: flex; flex-direction: column; align-items: center; justify-content: space-around; padding: 25px 0; z-index: 1; }
+        .task-sidebar { width: 130px; display: flex; flex-direction: column; align-items: center; justify-content: space-around; padding: 25px 0; z-index: 1; background: transparent; }
         .task-id { font-size: 1.5rem; font-weight: 700; color: var(--text-gray); opacity: 0.5; }
         .date-section { display: flex; flex-direction: column; align-items: center; gap: 10px; border: 1px solid var(--border-color); border-radius: 20px; padding: 15px 5px; width: 85%; }
         .date-start { font-size: 0.75rem; color: var(--text-gray); text-align: center; line-height: 1.2; font-weight: 600;}
@@ -96,82 +103,28 @@
         .date-deadline { text-align: center; color: var(--primary-red); font-weight: 700; line-height: 1; }
         .date-deadline span { font-size: 2rem; display: block; margin-bottom: 5px; }
 
-        footer { text-align: center; padding: 30px 0; font-size: 0.75rem; color: var(--text-gray); border-top: 1px solid var(--border-color); font-weight: 600; }
+        footer { text-align: center; padding: 30px 0; font-size: 0.75rem; color: var(--text-gray); border-top: 1px solid var(--border-color); font-weight: 600; margin-top: auto; }
+        .secret-link { color: inherit; text-decoration: none; cursor: default; transition: opacity 0.3s ease; }
+        .secret-link:hover { cursor: pointer; text-shadow: 0 0 8px var(--primary-red); }
 
-        /* --- MOBILE RESPONSIVE Perfecto --- */
-        @media (max-width: 768px) {
-            nav { padding: 20px 5%; }
-            .theme-toggle-btn { padding: 6px 12px; font-size: 0.6rem; }
-            .menu-toggle { display: flex; }
-            .nav-links { position: fixed; right: -100%; top: 0; flex-direction: column; background: var(--nav-bg); width: 100%; height: 100vh; justify-content: center; align-items: center; transition: 0.5s ease; border-left: 1px solid var(--border-color); z-index: 1050; }
-            .nav-links.active { right: 0; }
-            .container { grid-template-columns: 1fr; padding: 0 5% 40px; }
-            .task-card { flex-direction: column; border-radius: 20px;}
-            .task-main { border-right: none; border-bottom: 2px solid var(--border-color); }
-            .task-sidebar { width: 100%; flex-direction: row; padding: 15px 25px; justify-content: space-between; }
-            .date-section { flex-direction: row; width: auto; padding: 5px 15px; border-radius: 50px; }
-            .sidebar-divider { width: 1px; height: 20px; margin: 0 10px; }
-            .date-deadline span { display: inline; font-size: 1rem; margin-right: 5px; }
-            .task-id { font-size: 1.2rem;}
-        }
-
-        .secret-link {
-            color: inherit; 
-            text-decoration: none; 
-            cursor: default; 
-            transition: opacity 0.3s ease;
-        }
-
-        .secret-link:hover {
-            cursor: pointer; 
-            text-shadow: 0 0 8px var(--primary-red); 
-        }
-
-        /* --- EFEK LOAD SINEMATIK S-NX --- */
         @keyframes slideUp {
             0% { opacity: 0; transform: translateY(40px); }
             100% { opacity: 1; transform: translateY(0); }
         }
 
-        /* Animasi Navbar dihilangkan */
-
-        .hero {
-            opacity: 0;
-            animation: slideUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards 0.2s;
-        }
-
-        .task-card, .card {
-            opacity: 0;
-            animation: slideUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-        }
-
-        .task-card:nth-child(1), .card:nth-child(1) { animation-delay: 0.4s; }
-        .task-card:nth-child(2), .card:nth-child(2) { animation-delay: 0.5s; }
-        .task-card:nth-child(3), .card:nth-child(3) { animation-delay: 0.6s; }
-        .task-card:nth-child(4), .card:nth-child(4) { animation-delay: 0.7s; }
-        .task-card:nth-child(5), .card:nth-child(5) { animation-delay: 0.8s; }
-        .task-card:nth-child(6), .card:nth-child(6) { animation-delay: 0.9s; }
-
-        /* Tambahkan ini untuk mencegah bocor ke samping */
-        html, body {
-            overflow-x: hidden;
-            width: 100%;
-            position: relative;
-        }
-        
-        /* Update sidebar sedikit agar lebih aman */
+        /* Mobile Adjustments */
         @media (max-width: 768px) {
-            .sidebar {
-                /* Ganti left: -100% menjadi width statis agar browser tidak bingung */
-                left: -280px; 
-                width: 280px;
-                visibility: hidden; /* Sembunyikan total saat tidak aktif */
-            }
-            
-            .sidebar.active {
-                left: 0;
-                visibility: visible;
-            }
+            nav { padding: 20px 5%; }
+            .menu-toggle { display: flex; }
+            .nav-links { position: fixed; right: -100%; top: 0; flex-direction: column; background: var(--nav-bg); width: 100%; height: 100vh; justify-content: center; align-items: center; transition: 0.5s ease; z-index: 1050; }
+            .nav-links.active { right: 0; }
+            .container { grid-template-columns: 1fr; padding: 0 5% 40px; }
+            .task-card { flex-direction: column; }
+            .task-main { border-right: none; border-bottom: 2px solid var(--border-color); }
+            .task-sidebar { width: 100%; flex-direction: row; padding: 15px 25px; }
+            .date-section { flex-direction: row; width: auto; padding: 5px 15px; border-radius: 50px; }
+            .sidebar-divider { width: 1px; height: 20px; margin: 0 10px; }
+            .date-deadline span { display: inline; font-size: 1rem; }
         }
     </style>
 </head>
@@ -197,7 +150,7 @@
 
     <header class="hero">
         <h1>Pemantau Tugas</h1>
-        <p>Gunakan fitur pencarian dan filter untuk mempermudah pengecekan tugas. Data yang ditampilkan adalah informasi yang berhasil kami himpun sejauh ini. Harap tetap melakukan verifikasi mandiri karena informasi bisa berubah sewaktu-waktu. <br>‎ <span class="filter-label" style="margin-top: 10px;">(Khusus Kelas 8A)</span></p>
+        <p>Gunakan fitur pencarian dan filter untuk mempermudah pengecekan tugas. <br> <span class="filter-label" style="margin-top: 10px;">(Khusus Kelas 8A)</span></p>
         <div class="search-container">
             <input type="text" id="taskSearch" placeholder="Cari nama mata pelajaran atau detail tugas...">
         </div>
@@ -212,7 +165,7 @@
     <div id="emptyState">Pencarian tidak ditemukan</div>
     
     <div class="container" id="taskContainer">
-        <article class="task-card" data-subject="PAI">
+        <article class="task-card" data-subject="PAI" style="animation-delay: 0.4s;">
             <div class="task-main">
                 <div class="task-header"><h2 class="task-title">Pendidikan Agama Islam</h2><span class="label">Kelompok</span></div>
                 <div class="task-body">
@@ -226,7 +179,7 @@
             </div>
         </article>
 
-        <article class="task-card" data-subject="Matematika">
+        <article class="task-card" data-subject="Matematika" style="animation-delay: 0.5s;">
             <div class="task-main">
                 <div class="task-header"><h2 class="task-title">Matematika</h2><span class="label">Individu</span></div>
                 <div class="task-body">
@@ -240,7 +193,7 @@
             </div>
         </article>
 
-        <article class="task-card" data-subject="Informatika">
+        <article class="task-card" data-subject="Informatika" style="animation-delay: 0.6s;">
             <div class="task-main">
                 <div class="task-header"><h2 class="task-title">Informatika</h2><span class="label">Individu</span></div>
                 <div class="task-body">
@@ -258,6 +211,7 @@
     <footer><p>&copy; 2026 <a href="info.html" class="secret-link">Sthenos Nyx</a>. All Rights Reserved.</p></footer>
 
     <script>
+        // === Tema Logic ===
         const themeBtn = document.getElementById('themeToggle');
         const themeIcon = document.getElementById('themeIcon');
         const themeText = document.getElementById('themeText');
@@ -276,35 +230,43 @@
 
         updateUI(localStorage.getItem('theme') || 'dark');
 
-        if (themeBtn) {
-            themeBtn.addEventListener('click', () => {
-                const newTheme = document.body.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-                localStorage.setItem('theme', newTheme);
-                updateUI(newTheme);
-                themeIcon.style.transition = "0.4s";
-                themeIcon.style.transform = "rotate(360deg)";
-                setTimeout(() => { themeIcon.style.transform = "rotate(0deg)"; }, 400);
-            });
-        }
+        themeBtn.addEventListener('click', () => {
+            const newTheme = document.body.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            localStorage.setItem('theme', newTheme);
+            updateUI(newTheme);
+            themeIcon.style.transition = "0.4s";
+            themeIcon.style.transform = "rotate(360deg)";
+            setTimeout(() => { themeIcon.style.transform = "rotate(0deg)"; }, 400);
+        });
 
+        // === Search & Filter ===
         const searchInput = document.getElementById('taskSearch');
         const cards = document.querySelectorAll('.task-card');
 
         function updateDisplay() {
-            const searchText = searchInput ? searchInput.value.toLowerCase() : "";
+            const searchText = searchInput.value.toLowerCase();
             const activeBtn = document.querySelector('.filter-chip.active');
             const activeFilter = activeBtn ? activeBtn.innerText : 'Semua';
+            let visibleCount = 0;
 
             cards.forEach(card => {
                 const title = card.querySelector('.task-title').innerText.toLowerCase();
                 const subject = card.getAttribute('data-subject');
                 const matchesSearch = title.includes(searchText);
                 const matchesFilter = (activeFilter === 'Semua' || subject === activeFilter);
-                card.style.display = (matchesSearch && matchesFilter) ? "flex" : "none";
+                
+                if (matchesSearch && matchesFilter) {
+                    card.style.display = "flex";
+                    visibleCount++;
+                } else {
+                    card.style.display = "none";
+                }
             });
+
+            document.getElementById('emptyState').style.display = visibleCount === 0 ? "block" : "none";
         }
 
-        if (searchInput) searchInput.addEventListener('input', updateDisplay);
+        searchInput.addEventListener('input', updateDisplay);
 
         function filterTask(subject, btn) {
             document.querySelectorAll('.filter-chip').forEach(chip => chip.classList.remove('active'));
@@ -312,6 +274,7 @@
             updateDisplay();
         }
 
+        // === Mouse Follow Glow Effect ===
         cards.forEach(card => {
             card.addEventListener('mousemove', e => {
                 const rect = card.getBoundingClientRect();
@@ -319,27 +282,17 @@
                 card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
             });
         });
-        
-        // --- LOGIKA HAMBURGER MOBILE (FIXED) ---
-        function initMobileMenu() {
-            const mobileBtn = document.getElementById('mobile-menu');
-            const navList = document.getElementById('nav-list');
-            
-            if(mobileBtn && navList) {
-                mobileBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    navList.classList.toggle('active');
-                });
 
-                document.addEventListener('click', (e) => {
-                    if (!navList.contains(e.target) && !mobileBtn.contains(e.target) && navList.classList.contains('active')) {
-                        navList.classList.remove('active');
-                    }
-                });
-            }
+        // === Hamburger Menu ===
+        const mobileBtn = document.getElementById('mobile-menu');
+        const navList = document.getElementById('nav-list');
+        if(mobileBtn) {
+            mobileBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                navList.classList.toggle('active');
+            });
+            document.addEventListener('click', () => navList.classList.remove('active'));
         }
-
-        document.addEventListener('DOMContentLoaded', initMobileMenu);
     </script>
 </body>
 </html>
