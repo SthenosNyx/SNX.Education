@@ -4,127 +4,74 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="https://i.ibb.co.com/DfCjtjDg/LOGO-HEADER.png">
-    <title>S-Edu | Tugas</title>
+    <title>S-Edu | Jadwal</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <style>
-        /* --- S-NX SYSTEM VARIABLES --- */
         :root { 
-            --bg-color: #000; 
-            --card-bg: #0a0a0a; 
-            --primary-red: #5C5CFF; /* Biru Terang untuk Dark Mode */
+            --bg-color: #000; --card-bg: #0a0a0a; 
+            --primary-red: #5C5CFF; 
             --border-color: rgba(255, 255, 255, 0.15); 
-            --text-main: #fff; 
-            --text-gray: #a0a0a0; 
-            --nav-bg: rgba(0, 0, 0, 0.8); 
-            --glow-color: rgba(92, 92, 255, 0.2); /* Glow Navy Lembut */
+            --text-main: #fff; --text-gray: #a0a0a0; 
+            --nav-bg: rgba(0, 0, 0, 0.8);
+            --mobile-menu-bg: rgba(0, 0, 0, 0.98); /* Solid untuk mobile */
         }
-
         [data-theme="light"] { 
-            --bg-color: #f4f4f5; 
-            --card-bg: #fff; 
-            --primary-red: #010066; /* Navy Pekat untuk Light Mode */
+            --bg-color: #f4f4f5; --card-bg: #fff; 
+            --primary-red: #010066; 
             --border-color: rgba(0, 0, 0, 0.1); 
-            --text-main: #111; 
-            --text-gray: #666; 
-            --nav-bg: rgba(244, 244, 245, 0.9); 
-            --glow-color: rgba(1, 0, 102, 0.07); /* Glow Navy Transparan #01006612 */
+            --text-main: #111; --text-gray: #666; 
+            --nav-bg: rgba(244, 244, 245, 0.9);
+            --mobile-menu-bg: rgba(255, 255, 255, 0.98); /* Solid untuk mobile */
         }
-
+        
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: var(--bg-color); color: var(--text-main); font-family: 'Montserrat', sans-serif; min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; transition: background-color 0.4s, color 0.4s; }
-        ::selection { background-color: var(--text-main); color: var(--bg-color); }
+        body { background-color: var(--bg-color); color: var(--text-main); font-family: 'Montserrat', sans-serif; transition: 0.4s; overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column; }
 
-        /* --- Navbar --- */
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 8%; border-bottom: 1px solid var(--border-color); background: var(--nav-bg); backdrop-filter: blur(20px); position: sticky; top: 0; z-index: 1000; transition: 0.4s; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 8%; border-bottom: 1px solid var(--border-color); background: var(--nav-bg); backdrop-filter: blur(20px); position: sticky; top: 0; z-index: 1000; }
         .logo { font-weight: 700; letter-spacing: 2px; }
         .nav-right { display: flex; align-items: center; gap: 20px; }
         .nav-links { display: flex; gap: 30px; list-style: none; }
-        .nav-links a { text-decoration: none; color: var(--text-gray); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; transition: 0.3s; }
-        .nav-links a.active, .nav-links a:hover { color: var(--primary-red); }
+        .nav-links a { text-decoration: none; color: var(--text-gray); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; }
+        .nav-links a.active { color: var(--primary-red); }
 
-        .theme-toggle-btn {
-            background: transparent; border: 1px solid var(--border-color);
-            color: var(--text-main); padding: 8px 20px; border-radius: 50px;
-            font-size: 0.7rem; font-weight: 700; cursor: pointer;
-            transition: 0.3s; font-family: 'Montserrat'; display: flex; align-items: center; gap: 8px;
-        }
-        .theme-toggle-btn:hover { border-color: var(--primary-red); }
-
+        .theme-toggle-btn { background: transparent; border: 1px solid var(--border-color); color: var(--text-main); padding: 8px 20px; border-radius: 50px; font-size: 0.7rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px; font-family: 'Montserrat'; }
         .menu-toggle { display: none; flex-direction: column; cursor: pointer; gap: 6px; z-index: 1100; }
         .bar { width: 25px; height: 2px; background-color: var(--text-main); transition: 0.4s; border-radius: 2px; }
 
-        /* --- Hero Section --- */
-        .hero { text-align: center; padding: 60px 8% 20px; opacity: 0; animation: slideUp 0.8s forwards 0.2s; }
-        .hero h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: 700; letter-spacing: -1px; }
-        .hero p { color: var(--text-gray); font-size: 0.95rem; max-width: 600px; margin: 0 auto 30px; line-height: 1.6; }
+        .main-content { max-width: 1200px; margin: 0 auto; padding: 60px 8% 80px; display: flex; flex-direction: column; align-items: flex-start; flex-grow: 1; width: 100%;}
+        .hero { text-align: left; width: 100%; margin-bottom: 50px; }
+        .hero h1 { font-size: 2.8rem; font-weight: 700; letter-spacing: -1.5px; margin-left: -4px; }
+        .hero p { color: var(--text-gray); margin-top: 15px; line-height: 1.8; max-width: 700px; }
 
-        .search-container { max-width: 600px; margin: 0 auto 25px; }
-        #taskSearch { width: 100%; background: var(--card-bg); border: 1px solid var(--border-color); padding: 18px 30px; border-radius: 50px; color: var(--text-main); font-family: 'Montserrat'; outline: none; transition: 0.3s; font-size: 0.9rem; }
-        #taskSearch:focus { border-color: var(--primary-red); box-shadow: 0 0 20px rgba(92, 92, 255, 0.1); }
+        .month-year { font-size: 1.6rem; font-weight: 700; color: var(--primary-red); margin-bottom: 25px; text-transform: uppercase; width: 100%; }
 
-        .filter-label { font-size: 0.7rem; color: var(--text-gray); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; display: block; text-align: center; }
-        .filter-group { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; max-width: 900px; margin: 0 auto 40px; }
-        .filter-chip { background: transparent; border: 1px solid var(--border-color); color: var(--text-gray); padding: 8px 20px; border-radius: 50px; font-size: 0.75rem; font-weight: 600; cursor: pointer; transition: 0.3s; }
-        .filter-chip:hover, .filter-chip.active { border-color: var(--primary-red); color: var(--text-main); background: rgba(1, 0, 102, 0.05); }
+        .grid-container { width: 100%; overflow-x: auto; }
+        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 12px; min-width: 700px; }
+        .day-label { text-align: center; color: var(--text-gray); font-size: 0.7rem; font-weight: 700; padding-bottom: 15px; border-bottom: 1px solid var(--border-color); }
+        .day-cell { background: var(--card-bg); border: 1px solid var(--border-color); aspect-ratio: 1/1; padding: 12px; border-radius: 12px; animation: fadeInUp 0.5s forwards; transition: transform 0.3s, border-color 0.3s;}
+        .day-cell:hover { transform: translateY(-5px); border-color: var(--primary-red); }
+        .day-cell.today { border: 2px solid var(--primary-red); }
+        .day-number { font-weight: 700; color: var(--text-gray); }
+        .today .day-number { color: var(--primary-red); }
 
-        #emptyState { display: none; text-align: center; padding: 80px 0; color: var(--text-gray); font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; }
+        footer { text-align: center; padding: 30px 0; font-size: 0.75rem; color: var(--text-gray); border-top: 1px solid var(--border-color); margin-top: auto;}
 
-        /* --- Task Cards --- */
-        .container { padding: 0 8% 60px; display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 30px; flex-grow: 1; }
-        .task-card { background: var(--card-bg); border: 2px solid var(--border-color); border-radius: 30px; display: flex; position: relative; overflow: hidden; transition: 0.4s ease; opacity: 0; animation: slideUp 0.8s forwards; }
-        .task-card:hover { border-color: var(--primary-red); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-
-        /* Mouse Follow Effect */
-        .task-card::before { 
-            content: ""; position: absolute; width: 600px; height: 600px; 
-            top: calc(var(--mouse-y, -600px) - 300px); 
-            left: calc(var(--mouse-x, -600px) - 300px); 
-            background: radial-gradient(circle, var(--glow-color) 0%, transparent 70%); 
-            opacity: 0; transition: opacity 0.5s ease; pointer-events: none; z-index: 0; 
-        }
-        .task-card:hover::before { opacity: 1; }
-
-        .task-main { flex: 1; display: flex; flex-direction: column; z-index: 1; border-right: 2px solid var(--border-color); background: transparent; }
-        .task-header { padding: 25px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; }
-        .task-title { font-size: 1.3rem; font-weight: 700; }
-        .label { font-size: 0.6rem; border: 1px solid var(--border-color); padding: 5px 15px; border-radius: 50px; text-transform: uppercase; font-weight: 700; color: var(--text-gray); }
-
-        .task-body { padding: 25px; display: flex; flex-direction: column; gap: 15px; flex-grow: 1; }
-        .task-description { font-size: 0.9rem; color: var(--text-gray); line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-        .see-more { font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: 0.3s; margin-top: auto; text-decoration: none; color: var(--text-main); display: inline-block; position: relative; z-index: 10; }
-        .see-more:hover { color: var(--primary-red); }
-
-        .task-sidebar { width: 130px; display: flex; flex-direction: column; align-items: center; justify-content: space-around; padding: 25px 0; z-index: 1; background: transparent; }
-        .task-id { font-size: 1.5rem; font-weight: 700; color: var(--text-gray); opacity: 0.5; }
-        .date-section { display: flex; flex-direction: column; align-items: center; gap: 10px; border: 1px solid var(--border-color); border-radius: 20px; padding: 15px 5px; width: 85%; }
-        .date-start { font-size: 0.75rem; color: var(--text-gray); text-align: center; line-height: 1.2; font-weight: 600;}
-        .sidebar-divider { width: 40px; height: 1px; background: var(--border-color); }
-        .date-deadline { text-align: center; color: var(--primary-red); font-weight: 700; line-height: 1; }
-        .date-deadline span { font-size: 2rem; display: block; margin-bottom: 5px; }
-
-        footer { text-align: center; padding: 30px 0; font-size: 0.75rem; color: var(--text-gray); border-top: 1px solid var(--border-color); font-weight: 600; margin-top: auto; }
-        .secret-link { color: inherit; text-decoration: none; cursor: default; transition: opacity 0.3s ease; }
-        .secret-link:hover { cursor: pointer; text-shadow: 0 0 8px var(--primary-red); }
-
-        @keyframes slideUp {
-            0% { opacity: 0; transform: translateY(40px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Mobile Adjustments */
+        /* --- MOBILE MENU KONSISTEN (SOLID & ANTI BOCOR) --- */
         @media (max-width: 768px) {
             nav { padding: 20px 5%; }
             .menu-toggle { display: flex; }
-            .nav-links { position: fixed; right: -100%; top: 0; flex-direction: column; background: var(--nav-bg); width: 100%; height: 100vh; justify-content: center; align-items: center; transition: 0.5s ease; z-index: 1050; }
-            .nav-links.active { right: 0; }
-            .container { grid-template-columns: 1fr; padding: 0 5% 40px; }
-            .task-card { flex-direction: column; }
-            .task-main { border-right: none; border-bottom: 2px solid var(--border-color); }
-            .task-sidebar { width: 100%; flex-direction: row; padding: 15px 25px; }
-            .date-section { flex-direction: row; width: auto; padding: 5px 15px; border-radius: 50px; }
-            .sidebar-divider { width: 1px; height: 20px; margin: 0 10px; }
-            .date-deadline span { display: inline; font-size: 1rem; }
+            .nav-links { 
+                position: fixed; top: 0; right: 0; width: 70%; max-width: 300px; height: 100vh; 
+                background: var(--mobile-menu-bg); backdrop-filter: blur(10px);
+                flex-direction: column; justify-content: center; align-items: center; 
+                transform: translateX(100%); /* Sembunyi dengan rapi */
+                transition: transform 0.4s ease; z-index: 1050; 
+                border-left: 1px solid var(--border-color);
+            }
+            .nav-links.active { transform: translateX(0); }
+            .main-content { padding: 40px 5% 60px; }
+            .hero h1 { font-size: 2rem; }
         }
     </style>
 </head>
@@ -134,9 +81,9 @@
         <div class="logo">S-NX × EDU</div>
         <div class="nav-right">
             <ul class="nav-links" id="nav-list">
-                <li><a href="tugas.html" class="active">Tugas</a></li>
+                <li><a href="tugas.html">Tugas</a></li>
                 <li><a href="materi.html">Materi</a></li>
-                <li><a href="jadwal.html">Jadwal</a></li>
+                <li><a href="jadwal.html" class="active">Jadwal</a></li>
             </ul>
             <button class="theme-toggle-btn" id="themeToggle">
                 <span class="material-symbols-rounded" id="themeIcon" style="font-size: 18px;">dark_mode</span>
@@ -148,151 +95,62 @@
         </div>
     </nav>
 
-    <header class="hero">
-        <h1>Pemantau Tugas</h1>
-        <p>Gunakan fitur pencarian dan filter untuk mempermudah pengecekan tugas. <br> <span class="filter-label" style="margin-top: 10px;">(Khusus Kelas 8A)</span></p>
-        <div class="search-container">
-            <input type="text" id="taskSearch" placeholder="Cari nama mata pelajaran atau detail tugas...">
+    <div class="main-content">
+        <header class="hero">
+            <h1>Prediksi Jadwal & Agenda</h1>
+            <p>Agenda yang telah terlampaui akan diarsip otomatis secara visual.</p>
+        </header>
+
+        <div class="month-year" id="monthDisplay">APRIL 2026</div>
+        
+        <div class="grid-container">
+            <div class="calendar-grid" id="calendarGrid">
+                <div class="day-label">MGG</div><div class="day-label">SEN</div><div class="day-label">SEL</div><div class="day-label">RAB</div><div class="day-label">KAM</div><div class="day-label">JUM</div><div class="day-label">SAB</div>
+            </div>
         </div>
-        <div class="filter-group">
-            <button class="filter-chip active" onclick="filterTask('Semua', this)">Semua</button>
-            <button class="filter-chip" onclick="filterTask('PAI', this)">PAI</button>
-            <button class="filter-chip" onclick="filterTask('Matematika', this)">Matematika</button>
-            <button class="filter-chip" onclick="filterTask('Informatika', this)">Informatika</button>
-        </div>
-    </header>
-
-    <div id="emptyState">Pencarian tidak ditemukan</div>
-    
-    <div class="container" id="taskContainer">
-        <article class="task-card" data-subject="PAI" style="animation-delay: 0.4s;">
-            <div class="task-main">
-                <div class="task-header"><h2 class="task-title">Pendidikan Agama Islam</h2><span class="label">Kelompok</span></div>
-                <div class="task-body">
-                    <div class="task-description">Jelaskan perbedaan ghibah, kritik, dan review produk di media sosial. Sertakan contoh kasus nyata untuk masing-masing poin.</div>
-                    <a href="#" class="see-more">Lihat detail...</a>
-                </div>
-            </div>
-            <div class="task-sidebar">
-                <div class="task-id">#1</div>
-                <div class="date-section"><div class="date-start">15 Mei</div><div class="sidebar-divider"></div><div class="date-deadline"><span>6</span>JUN</div></div>
-            </div>
-        </article>
-
-        <article class="task-card" data-subject="Matematika" style="animation-delay: 0.5s;">
-            <div class="task-main">
-                <div class="task-header"><h2 class="task-title">Matematika</h2><span class="label">Individu</span></div>
-                <div class="task-body">
-                    <div class="task-description">Selesaikan soal latihan persamaan kuadrat di halaman 45. Tunjukkan langkah pengerjaan menggunakan metode rumus ABC secara sistematis.</div>
-                    <a href="#" class="see-more">Lihat detail...</a>
-                </div>
-            </div>
-            <div class="task-sidebar">
-                <div class="task-id">#2</div>
-                <div class="date-section"><div class="date-start">1 Apr</div><div class="sidebar-divider"></div><div class="date-deadline"><span>15</span>APR</div></div>
-            </div>
-        </article>
-
-        <article class="task-card" data-subject="Informatika" style="animation-delay: 0.6s;">
-            <div class="task-main">
-                <div class="task-header"><h2 class="task-title">Informatika</h2><span class="label">Individu</span></div>
-                <div class="task-body">
-                    <div class="task-description">Pelajari konsep dasar pemrograman Python serta kerjakan soal evaluasi pada halaman 87. Kumpulkan dalam bentuk file .py.</div>
-                    <a href="#" class="see-more">Lihat detail...</a>
-                </div>
-            </div>
-            <div class="task-sidebar">
-                <div class="task-id">#3</div>
-                <div class="date-section"><div class="date-start">5 Apr</div><div class="sidebar-divider"></div><div class="date-deadline"><span>20</span>APR</div></div>
-            </div>
-        </article>
     </div>
 
-    <footer><p>&copy; 2026 <a href="info.html" class="secret-link">Sthenos Nyx</a>. All Rights Reserved.</p></footer>
+    <footer><p>&copy; 2026 Sthenos Nyx. All Rights Reserved.</p></footer>
 
     <script>
-        // === Tema Logic ===
+        // Tema
         const themeBtn = document.getElementById('themeToggle');
-        const themeIcon = document.getElementById('themeIcon');
-        const themeText = document.getElementById('themeText');
-
         function updateUI(theme) {
-            if (theme === 'light') {
-                document.body.setAttribute('data-theme', 'light');
-                if (themeIcon) themeIcon.innerText = "light_mode";
-                if (themeText) themeText.innerText = "LIGHT";
-            } else {
-                document.body.removeAttribute('data-theme');
-                if (themeIcon) themeIcon.innerText = "dark_mode";
-                if (themeText) themeText.innerText = "DARK";
-            }
+            document.body.setAttribute('data-theme', theme);
+            if(theme === 'dark') document.body.removeAttribute('data-theme');
+            document.getElementById('themeIcon').innerText = theme === 'light' ? 'light_mode' : 'dark_mode';
+            document.getElementById('themeText').innerText = theme === 'light' ? 'LIGHT' : 'DARK';
         }
-
         updateUI(localStorage.getItem('theme') || 'dark');
-
         themeBtn.addEventListener('click', () => {
             const newTheme = document.body.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
             localStorage.setItem('theme', newTheme);
             updateUI(newTheme);
-            themeIcon.style.transition = "0.4s";
-            themeIcon.style.transform = "rotate(360deg)";
-            setTimeout(() => { themeIcon.style.transform = "rotate(0deg)"; }, 400);
         });
 
-        // === Search & Filter ===
-        const searchInput = document.getElementById('taskSearch');
-        const cards = document.querySelectorAll('.task-card');
-
-        function updateDisplay() {
-            const searchText = searchInput.value.toLowerCase();
-            const activeBtn = document.querySelector('.filter-chip.active');
-            const activeFilter = activeBtn ? activeBtn.innerText : 'Semua';
-            let visibleCount = 0;
-
-            cards.forEach(card => {
-                const title = card.querySelector('.task-title').innerText.toLowerCase();
-                const subject = card.getAttribute('data-subject');
-                const matchesSearch = title.includes(searchText);
-                const matchesFilter = (activeFilter === 'Semua' || subject === activeFilter);
-                
-                if (matchesSearch && matchesFilter) {
-                    card.style.display = "flex";
-                    visibleCount++;
-                } else {
-                    card.style.display = "none";
-                }
-            });
-
-            document.getElementById('emptyState').style.display = visibleCount === 0 ? "block" : "none";
+        // Generate Kalender Sederhana
+        const grid = document.getElementById('calendarGrid');
+        for (let i = 0; i < 3; i++) grid.appendChild(document.createElement('div')); // Offset
+        for (let day = 1; day <= 30; day++) {
+            const cell = document.createElement('div');
+            cell.className = 'day-cell';
+            cell.innerHTML = `<span class="day-number">${day}</span>`;
+            if(day === 11) cell.classList.add('today');
+            grid.appendChild(cell);
         }
 
-        searchInput.addEventListener('input', updateDisplay);
-
-        function filterTask(subject, btn) {
-            document.querySelectorAll('.filter-chip').forEach(chip => chip.classList.remove('active'));
-            btn.classList.add('active');
-            updateDisplay();
-        }
-
-        // === Mouse Follow Glow Effect ===
-        cards.forEach(card => {
-            card.addEventListener('mousemove', e => {
-                const rect = card.getBoundingClientRect();
-                card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
-                card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
-            });
-        });
-
-        // === Hamburger Menu ===
+        // Mobile Menu Fix
         const mobileBtn = document.getElementById('mobile-menu');
         const navList = document.getElementById('nav-list');
-        if(mobileBtn) {
-            mobileBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                navList.classList.toggle('active');
-            });
-            document.addEventListener('click', () => navList.classList.remove('active'));
-        }
+        mobileBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            navList.classList.toggle('active');
+        });
+        document.addEventListener('click', (e) => {
+            if (!navList.contains(e.target) && !mobileBtn.contains(e.target)) {
+                navList.classList.remove('active');
+            }
+        });
     </script>
 </body>
 </html>
