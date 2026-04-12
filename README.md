@@ -1,29 +1,36 @@
-# S-Edu | Unified Academic Dashboard 🎓
+# S-NX Education | Opening
+S-NX Education (S-Edu) is a digital learning ecosystem that prioritizes an ultra-minimalist aesthetic and high functionality. We will continue to update the system in accordance with user complaints and will develop it until the final stage of perfection.
 
-A cinematic, high-end academic portal built for **Ibnul Qayyim Islamic School Makassar (IQIS)**. 
-Developed by **Sthenos Nyx**, S-Edu combines minimalist UI/UX with smart functionality to help students manage their academic journey.
+The portal is a high-fidelity academic environment custom-built for Ibnul Qayyim Islamic School Makassar (IQIS). Developed under the S-NX design philosophy, it integrates a sophisticated UI/UX framework with high-performance logic to streamline the student academic journey.
 
 ---
 
-## ✨ Features
-* **S-Edu Theme Engine:** Intelligent Dark/Light mode toggle with persistent memory (`LocalStorage`).
-* **Cinematic UI:** High-contrast aesthetic with custom "S-NX Red" glow accents and smooth transitions.
-* **Automated Scheduler:** A dynamic calendar system that distinguishes between upcoming and past agendas.
-* **Smart Task Management:** Integrated search and filter system for assignments and study materials.
-* **Responsive Architecture:** Fully optimized for both desktop and mobile viewing.
+## Technical Features
 
-## 🛠️ Tech Stack
-- **Languages:** HTML5, CSS3, JavaScript (Vanilla)
-- **Framework:** None (Pure Hand-coded Logic)
-- **Typography:** Montserrat & Material Symbols
-- **Logic Support:** Gemini AI Partner
+### Advanced Navigation Architecture
+- **Independent Layering System:** Utilizing a decoupled DOM hierarchy to ensure 100% viewport stability, eliminating layout drift and dead zones during sidebar transitions.
+- **Synchronized Push Logic:** A hardware-accelerated movement engine that shifts the primary interface in tandem with the navigation drawer, maintaining full discoverability of interactive elements.
 
-## 📂 Project Structure
+### Persistence and State Management
+- **S-Edu Theme Engine:** A memory-persistent Dark/Light mode toggle utilizing LocalStorage to maintain user preferences across multiple sessions.
+- **Dynamic Content Filtering:** Integrated search and categorization logic for academic tasks, allowing for instantaneous data retrieval without page reloads.
+
+### Responsive Design Philosophy
+- **Adaptive Viewports:** Fully optimized for high-resolution desktop monitors and mobile devices, utilizing fluid typography and calibrated cubic-bezier animations (0.4s) for a premium feel.
+- **Intelligent Scheduler:** A JavaScript-driven calendar system designed to manage academic agendas with real-time status updates.
+
+## Technical Stack
+- **Languages:** HTML5 (Semantic Structure), CSS3 (Modern Flex/Grid & Variables), JavaScript (Vanilla ES6+)
+- **Architecture:** Zero-Framework approach for maximum performance and pure hand-coded logic.
+- **Typography & Icons:** Montserrat System and Google Material Symbols (Rounded variant).
+- **Core Intelligence:** Collaborative logic development via Gemini AI Partner.
+
+## Directory Structure
 ```text
 /
-├── vercel.json (Deployment configuration)
-└── /core
-    ├── index.html (Main Dashboard / Tugas)
-    ├── jadwal.html (Academic Calendar)
-    ├── materi.html (Library)
-    └── info.html (Behind the Project - Secret Link)
+├── vercel.json           (Deployment and Routing Configuration)
+├── index.html            (Primary Dashboard and Task Hub)
+├── materi-lengkap.html   (Optimized Library with Accordion Logic)
+├── jadwal.html           (Advanced Academic Calendar Interface)
+├── info.html             (Project Documentation and Metadata)
+└── /assets               (Assets Galery)
