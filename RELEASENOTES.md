@@ -1,4 +1,4 @@
-# S-NX Education | Professional Development Logs
+# S-NX Education | Official Change Logs
 
 ## [Version 1.2.2] - 2026-04-12
 ### Refined Layout Integrity
