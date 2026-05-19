@@ -1,169 +1,159 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="https://i.ibb.co.com/DfCjtjDg/LOGO-HEADER.png">
-    <title>S-Edu | Jadwal</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <style>
-        :root { 
-            --bg-color: #000; --card-bg: #0a0a0a; 
-            --primary-red: #5C5CFF; 
-            --border-color: rgba(255, 255, 255, 0.15); 
-            --text-main: #fff; --text-gray: #a0a0a0; 
-            --nav-bg: rgba(0, 0, 0, 0.8);
-            --mobile-menu-bg: rgba(0, 0, 0, 0.98); /* Solid untuk mobile */
-        }
-        [data-theme="light"] { 
-            --bg-color: #f4f4f5; --card-bg: #fff; 
-            --primary-red: #010066; 
-            --border-color: rgba(0, 0, 0, 0.1); 
-            --text-main: #111; --text-gray: #666; 
-            --nav-bg: rgba(244, 244, 245, 0.9);
-            --mobile-menu-bg: rgba(255, 255, 255, 0.98); /* Solid untuk mobile */
-        }
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: var(--bg-color); color: var(--text-main); font-family: 'Montserrat', sans-serif; transition: 0.4s; overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column; }
-
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 8%; border-bottom: 1px solid var(--border-color); background: var(--nav-bg); backdrop-filter: blur(20px); position: sticky; top: 0; z-index: 1000; }
-        .logo { 
-            font-weight: 700; 
-            letter-spacing: 2px; 
-            text-decoration: none; /* Menghilangkan garis bawah */
-            color: var(--text-main); /* Mengikuti warna teks utama (Putih/Hitam) */
-            transition: 0.3s;
-            cursor: default; /* Membuat kursor tetap panah, bukan tangan (opsional agar makin rahasia) */
-        }
-        
-        /* Tip: Jika ingin ada sedikit tanda saat di-hover oleh orang yang teliti */
-        .logo:hover {
-            opacity: 0.8;
-            text-shadow: 0 0 10px var(--primary-red); /* Efek glow tipis saat disentuh */
-        }
-        .nav-right { display: flex; align-items: center; gap: 20px; }
-        .nav-links { display: flex; gap: 30px; list-style: none; }
-        .nav-links a { text-decoration: none; color: var(--text-gray); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; }
-        .nav-links a.active { color: var(--primary-red); }
-
-        .theme-toggle-btn { background: transparent; border: 1px solid var(--border-color); color: var(--text-main); padding: 8px 20px; border-radius: 50px; font-size: 0.7rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px; font-family: 'Montserrat'; }
-        .menu-toggle { display: none; flex-direction: column; cursor: pointer; gap: 6px; z-index: 1100; }
-        .bar { width: 25px; height: 2px; background-color: var(--text-main); transition: 0.4s; border-radius: 2px; }
-
-        .main-content { max-width: 1200px; margin: 0 auto; padding: 60px 8% 80px; display: flex; flex-direction: column; align-items: flex-start; flex-grow: 1; width: 100%;}
-        .hero { text-align: left; width: 100%; margin-bottom: 50px; }
-        .hero h1 { font-size: 2.8rem; font-weight: 700; letter-spacing: -1.5px; margin-left: -4px; }
-        .hero p { color: var(--text-gray); margin-top: 15px; line-height: 1.8; max-width: 700px; }
-
-        .month-year { font-size: 1.6rem; font-weight: 700; color: var(--primary-red); margin-bottom: 25px; text-transform: uppercase; width: 100%; }
-
-        .grid-container { width: 100%; overflow-x: auto; }
-        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 12px; min-width: 700px; }
-        .day-label { text-align: center; color: var(--text-gray); font-size: 0.7rem; font-weight: 700; padding-bottom: 15px; border-bottom: 1px solid var(--border-color); }
-        .day-cell { background: var(--card-bg); border: 1px solid var(--border-color); aspect-ratio: 1/1; padding: 12px; border-radius: 12px; animation: fadeInUp 0.5s forwards; transition: transform 0.3s, border-color 0.3s;}
-        .day-cell:hover { transform: translateY(-5px); border-color: var(--primary-red); }
-        .day-cell.today { border: 2px solid var(--primary-red); }
-        .day-number { font-weight: 700; color: var(--text-gray); }
-        .today .day-number { color: var(--primary-red); }
-
-        footer { text-align: center; padding: 30px 0; font-size: 0.75rem; color: var(--text-gray); border-top: 1px solid var(--border-color); font-weight: 600; margin-top: auto; }
-
-        /* --- MOBILE MENU KONSISTEN (SOLID & ANTI BOCOR) --- */
-        @media (max-width: 768px) {
-            nav { padding: 20px 5%; }
-            .menu-toggle { display: flex; }
-            .nav-links { 
-                position: fixed; top: 0; right: 0; width: 70%; max-width: 300px; height: 100vh; 
-                background: var(--mobile-menu-bg); backdrop-filter: blur(10px);
-                flex-direction: column; justify-content: center; align-items: center; 
-                transform: translateX(100%); /* Sembunyi dengan rapi */
-                transition: transform 0.4s ease; z-index: 1050; 
-                border-left: 1px solid var(--border-color);
-            }
-            .nav-links.active { transform: translateX(0); }
-            .main-content { padding: 40px 5% 60px; }
-            .hero h1 { font-size: 2rem; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="https://i.ibb.co.com/DfCjtjDg/LOGO-HEADER.png">
+  <title>S-Edu | Jadwal</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="stylesheet" href="../assets/css/global.css">
+  <style>
+  </style>
 </head>
-<body data-theme="dark">
+<body>
 
-    <nav>
-        <a href="info.html" class="logo">S-NX × EDU</a>
-        <div class="nav-right">
-            <ul class="nav-links" id="nav-list">
-                <li><a href="tugas.html">Tugas</a></li>
-                <li><a href="materi.html">Materi</a></li>
-                <li><a href="jadwal.html" class="active">Jadwal</a></li>
-            </ul>
-            <button class="theme-toggle-btn" id="themeToggle">
-                <span class="material-symbols-rounded" id="themeIcon" style="font-size: 18px;">dark_mode</span>
-                <span id="themeText">DARK</span>
-            </button>
-            <div class="menu-toggle" id="mobile-menu">
-                <span class="bar"></span><span class="bar"></span><span class="bar"></span>
-            </div>
-        </div>
-    </nav>
+  <nav class="snx-nav">
+    <a href="tentang.html" class="logo">S-NX × EDU</a>
+    <div class="nav-right">
+      <ul class="nav-links" id="navList">
+        <li><a href="tentang.html">Tentang</a></li>
+        <li><a href="tugas.html">Tugas</a></li>
+        <li><a href="materi.html">Materi</a></li>
+        <li><a href="jadwal.html" class="active">Jadwal</a></li>
+      </ul>
+      <button class="theme-btn" id="themeToggle">
+        <span class="material-symbols-rounded" id="themeIcon" style="font-size:18px">dark_mode</span>
+        <span id="themeText" class="btn-label">DARK</span>
+      </button>
+      <button class="menu-toggle" id="menuToggle" aria-label="Buka menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div>
+  </nav>
+  <div class="nav-overlay" id="navOverlay"></div>
 
-    <div class="main-content">
-        <header class="hero">
-            <h1>Prediksi Jadwal & Agenda</h1>
-            <p>Agenda yang telah terlampaui akan diarsip otomatis secara visual.</p>
-        </header>
+  <div class="schedule-page">
 
-        <div class="month-year" id="monthDisplay">APRIL 2026</div>
-        
-        <div class="grid-container">
-            <div class="calendar-grid" id="calendarGrid">
-                <div class="day-label">MGG</div><div class="day-label">SEN</div><div class="day-label">SEL</div><div class="day-label">RAB</div><div class="day-label">KAM</div><div class="day-label">JUM</div><div class="day-label">SAB</div>
-            </div>
-        </div>
+    <div class="schedule-hero anim d1">
+      <h1>Prediksi Jadwal & Agenda</h1>
+      <p>Agenda yang telah terlampaui akan diarsip otomatis secara visual, ditandai dengan tampilan redup.</p>
     </div>
 
-    <footer><p>&copy; 2026 Sthenos Nyx. All Rights Reserved.</p></footer>
+    <div class="month-label anim d2" id="monthLabel">— —</div>
 
-    <script>
-        // Tema
-        const themeBtn = document.getElementById('themeToggle');
-        function updateUI(theme) {
-            document.body.setAttribute('data-theme', theme);
-            if(theme === 'dark') document.body.removeAttribute('data-theme');
-            document.getElementById('themeIcon').innerText = theme === 'light' ? 'light_mode' : 'dark_mode';
-            document.getElementById('themeText').innerText = theme === 'light' ? 'LIGHT' : 'DARK';
+    <div class="cal-wrap anim d3">
+      <div class="cal-grid" id="calGrid">
+        <!-- Day labels -->
+        <div class="day-lbl">MGG</div>
+        <div class="day-lbl">SEN</div>
+        <div class="day-lbl">SEL</div>
+        <div class="day-lbl">RAB</div>
+        <div class="day-lbl">KAM</div>
+        <div class="day-lbl">JUM</div>
+        <div class="day-lbl">SAB</div>
+      </div>
+    </div>
+
+    <p class="events-title anim d4">Agenda Mendatang</p>
+    <div class="events-list anim d5" id="eventsList"></div>
+
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Sthenos Nyx. All Rights Reserved.</p>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    /* ── Inline data (mirrors ../data/jadwal-db.json) ── */
+    const jadwalDB = [
+      { id: 1, title: "Outing Class (Ikhwan)",      date: "2026-05-22" },
+      { id: 2, title: "Outing Class (Akhwat)",       date: "2026-05-23" },
+      { id: 3, title: "Ujian Akhir Semester 2",      date: "2026-06-08" },
+      { id: 4, title: "Penerimaan Rapor Semester 2", date: "2026-06-22" },
+      { id: 5, title: "Libur Akhir Tahun Ajaran",    date: "2026-06-25" }
+    ];
+
+    /* ── Calendar ── */
+    function buildCalendar() {
+      const now      = new Date();
+      const year     = now.getFullYear();
+      const month    = now.getMonth();   // 0-indexed
+      const today    = now.getDate();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      const firstDay   = new Date(year, month, 1).getDay(); // 0 = Sunday
+
+      const MONTHS_ID = ["Januari","Februari","Maret","April","Mei","Juni",
+                         "Juli","Agustus","September","Oktober","November","Desember"];
+
+      document.getElementById('monthLabel').textContent =
+        `${MONTHS_ID[month]} ${year}`;
+
+      // Build event lookup map: "YYYY-MM-DD" → title
+      const eventMap = {};
+      jadwalDB.forEach(e => { eventMap[e.date] = e.title; });
+
+      const grid = document.getElementById('calGrid');
+
+      // Empty offset cells
+      for (let i = 0; i < firstDay; i++) {
+        const empty = document.createElement('div');
+        grid.appendChild(empty);
+      }
+
+      // Day cells
+      for (let d = 1; d <= daysInMonth; d++) {
+        const cell   = document.createElement('div');
+        cell.className = 'day-cell';
+
+        const mm  = String(month + 1).padStart(2, '0');
+        const dd  = String(d).padStart(2, '0');
+        const key = `${year}-${mm}-${dd}`;
+
+        const num = document.createElement('span');
+        num.className = 'day-num';
+        num.textContent = d;
+        cell.appendChild(num);
+
+        if (d === today) cell.classList.add('today');
+        if (d < today)   cell.classList.add('past');
+
+        if (eventMap[key]) {
+          cell.classList.add('has-event');
+          const chip = document.createElement('p');
+          chip.className = 'event-chip';
+          chip.textContent = eventMap[key];
+          cell.appendChild(chip);
         }
-        updateUI(localStorage.getItem('theme') || 'dark');
-        themeBtn.addEventListener('click', () => {
-            const newTheme = document.body.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-            localStorage.setItem('theme', newTheme);
-            updateUI(newTheme);
-        });
 
-        // Generate Kalender Sederhana
-        const grid = document.getElementById('calendarGrid');
-        for (let i = 0; i < 3; i++) grid.appendChild(document.createElement('div')); // Offset
-        for (let day = 1; day <= 30; day++) {
-            const cell = document.createElement('div');
-            cell.className = 'day-cell';
-            cell.innerHTML = `<span class="day-number">${day}</span>`;
-            if(day === 11) cell.classList.add('today');
-            grid.appendChild(cell);
-        }
+        grid.appendChild(cell);
+      }
+    }
 
-        // Mobile Menu Fix
-        const mobileBtn = document.getElementById('mobile-menu');
-        const navList = document.getElementById('nav-list');
-        mobileBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            navList.classList.toggle('active');
-        });
-        document.addEventListener('click', (e) => {
-            if (!navList.contains(e.target) && !mobileBtn.contains(e.target)) {
-                navList.classList.remove('active');
-            }
-        });
-    </script>
+    /* ── Events list ── */
+    function buildEvents() {
+      const list = document.getElementById('eventsList');
+      const now  = new Date();
+
+      list.innerHTML = jadwalDB.map(e => {
+        const d    = new Date(e.date);
+        const past = d < now;
+        const fmt  = d.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+        return `
+          <div class="event-item${past ? ' past' : ''}">
+            <span class="event-name">${e.title}</span>
+            <span class="event-date">${fmt}</span>
+          </div>
+        `;
+      }).join('');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      buildCalendar();
+      buildEvents();
+    });
+  </script>
 </body>
 </html>
