@@ -10,7 +10,11 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
     
     <style>
-        /* --- S-NX CSS Variables (Dark & Light) --- */
+        ::selection {
+            background-color: var(--selection-bg);
+            color: var(--selection-text);
+        }
+        
         :root { 
             --bg-color: #000; 
             --card-bg: #0a0a0a; 
@@ -18,7 +22,9 @@
             --border-color: rgba(255, 255, 255, 0.15); 
             --text-main: #fff; 
             --text-gray: #a0a0a0; 
-            --nav-bg: rgba(0, 0, 0, 0.8); 
+            --nav-bg: rgba(0, 0, 0, 0.8);
+            --selection-bg: #fff;    /* Background putih saat dark mode */
+            --selection-text: #000;  /* Teks hitam saat dark mode */
         }
 
         [data-theme="light"] { 
@@ -28,7 +34,9 @@
             --border-color: rgba(0, 0, 0, 0.1); 
             --text-main: #111; 
             --text-gray: #666; 
-            --nav-bg: rgba(244, 244, 245, 0.9); 
+            --nav-bg: rgba(244, 244, 245, 0.9);
+            --selection-bg: #000;    /* Background hitam saat light mode */
+            --selection-text: #fff;  /* Teks putih saat light mode */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
