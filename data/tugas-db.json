@@ -1,0 +1,52 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "category": "Matematika",
+      "type": "eksak",
+      "title": "Persamaan Kuadrat",
+      "desc": "Selesaikan 10 soal latihan mengenai metode pemfaktoran yang ada di buku cetak halaman 45.",
+      "deadline": "2026-05-20"
+    },
+    {
+      "id": 2,
+      "category": "Bahasa - Inggris",
+      "type": "bahasa",
+      "title": "Composition Essay",
+      "desc": "Tuliskan 100 kosakata yang kamu ketahui serta buatlah esai mengenai aktivitas kamu sehari-hari dalam bahasa Inggris.",
+      "deadline": "2026-05-22"
+    },
+    {
+      "id": 3,
+      "category": "Pendidikan Agama Islam",
+      "type": "agama",
+      "title": "Perbedaan Ghibah & Kritik",
+      "desc": "Selesaikan 3 soal latihan mengenai perbedaan ghibah dan kritik berdasarkan tugas yang diberikan.",
+      "deadline": "2026-05-23"
+    },
+    {
+      "id": 4,
+      "category": "Ilmu Pengetahuan Alam",
+      "type": "eksak",
+      "title": "Mengenali Ekosistem",
+      "desc": "Kerjakan asesmen akhir bab 7 pada halaman 183 di buku cetak.",
+      "deadline": "2026-05-25"
+    },
+    {
+      "id": 5,
+      "category": "Bahasa Arab",
+      "type": "agama",
+      "title": "Mufrodat Bab 3",
+      "desc": "Hafal dan tuliskan 30 kosakata Bahasa Arab beserta artinya dari buku LKS halaman 22-23.",
+      "deadline": "2026-05-27"
+    },
+    {
+      "id": 6,
+      "category": "Informatika",
+      "type": "eksak",
+      "title": "Flowchart Algoritma",
+      "desc": "Buat flowchart untuk menyelesaikan masalah menghitung nilai rata-rata dari 5 angka yang diinput.",
+      "deadline": "2026-05-28"
+    }
+  ]
+}
