@@ -1,209 +1,142 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="https://i.ibb.co.com/DfCjtjDg/LOGO-HEADER.png">
-    <title>S-Edu | Materi Lengkap</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <style>
-        :root { 
-            --bg-color: #000; 
-            --side-bg: #0a0a0a; 
-            --primary-blue: #5C5CFF; 
-            --border-color: rgba(255, 255, 255, 0.15); 
-            --text-main: #fff; 
-            --text-gray: #a0a0a0; 
-            --nav-bg: rgba(0, 0, 0, 0.8); 
-        }
-        [data-theme="light"] { 
-            --bg-color: #f4f4f5; 
-            --side-bg: #fff; 
-            --primary-blue: #010066; 
-            --border-color: rgba(0, 0, 0, 0.1); 
-            --text-main: #111; 
-            --text-gray: #666; 
-            --nav-bg: rgba(244, 244, 245, 0.9); 
-        }
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            background-color: var(--bg-color); 
-            color: var(--text-main); 
-            font-family: 'Montserrat', sans-serif; 
-            overflow-x: hidden;
-            transition: background 0.4s;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="https://i.ibb.co.com/DfCjtjDg/LOGO-HEADER.png">
+  <title>S-Edu | Materi Lengkap</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="stylesheet" href="../assets/css/global.css">
 
-        /* --- Sidebar --- */
-        .sidebar { 
-            width: 300px; 
-            background-color: var(--side-bg); 
-            border-right: 1px solid var(--border-color); 
-            display: flex; 
-            flex-direction: column; 
-            height: 100vh;
-            position: fixed; /* Tetap di kiri */
-            top: 0;
-            left: 0;
-            z-index: 1000;
-            transform: translateX(-100%); /* Sembunyi di kiri luar layar */
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        /* --- Main Content --- */
-        .main-content { 
-            width: 100%;
-            min-height: 100vh;
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Logic Push Effect */
-        body.sidebar-open .sidebar { transform: translateX(0); }
-        body.sidebar-open .main-content { transform: translateX(300px); }
-
-        /* Sidebar Internal Elements */
-        .sidebar-header { padding: 25px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; }
-        .sidebar-header h2 { font-size: 0.8rem; color: var(--primary-blue); font-weight: 700; letter-spacing: 1px; }
-        .logo-small { font-weight: 700; letter-spacing: 1px; font-size: 0.9rem;}
-
-        .sidebar-scroll { flex: 1; overflow-y: auto; padding: 10px 0; }
-        .category-btn { width: 100%; padding: 15px 25px; background: transparent; border: none; color: var(--text-main); display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-family: 'Montserrat'; font-size: 0.85rem; font-weight: 700; }
-        .category-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; background: rgba(255,255,255,0.02); }
-        .nav-item { padding: 12px 45px; display: block; text-decoration: none; color: var(--text-gray); font-size: 0.75rem; border-left: 2px solid transparent; }
-        .nav-item:hover { color: var(--text-main); border-left-color: var(--primary-blue); background: rgba(92, 92, 255, 0.05); }
-
-        .top-nav { 
-            padding: 15px 5%; 
-            display: flex; 
-            align-items: center; 
-            background: var(--nav-bg); 
-            backdrop-filter: blur(15px); 
-            border-bottom: 1px solid var(--border-color); 
-            position: sticky; 
-            top: 0; 
-            z-index: 900; 
-        }
-        
-        .back-link { 
-            color: var(--text-gray); 
-            text-decoration: none; 
-            font-size: 0.8rem; 
-            font-weight: 600; 
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .reading-area { padding: 50px 8%; max-width: 900px; margin: 0 auto; }
-        .reading-area h1 { font-size: 2.2rem; margin-bottom: 10px; font-weight: 700; }
-        .reading-area p { margin-bottom: 20px; color: var(--text-gray); line-height: 1.8; font-size: 0.95rem; }
-        
-        .quote { background: var(--side-bg); padding: 25px; border-left: 4px solid var(--primary-blue); border-radius: 10px; margin: 30px 0; font-style: italic; font-weight: 600; }
-
-        /* Floating Button */
-        .sidebar-toggle-fab {
-            position: fixed; bottom: 30px; right: 30px;
-            background: var(--primary-blue); color: white; border: none; 
-            border-radius: 50%; width: 56px; height: 56px;
-            display: flex; justify-content: center; align-items: center; 
-            cursor: pointer; z-index: 10001; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-
-        /* Desktop Adjustment */
-        @media (min-width: 901px) {
-            .sidebar { transform: translateX(0); }
-            .main-content { margin-left: 300px; width: calc(100% - 300px); }
-            .sidebar-toggle-fab { display: none; }
-            body.sidebar-open .main-content { transform: none; }
-        }
-    </style>
+  <!-- ANTI-FLICKER: Apply saved theme before first paint. This is the ONLY allowed inline script. -->
+  <script>
+    (function () {
+      var t = localStorage.getItem('snx-theme') || 'dark';
+      if (t === 'light') document.documentElement.setAttribute('data-theme', 'light');
+    })();
+  </script>
 </head>
-<body data-theme="dark">
+<body>
 
-    <aside class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <div class="logo-small">S-NX × EDU</div>
-            <h2>DAFTAR ISI</h2>
-        </div>
-        <div class="sidebar-scroll">
-            <div class="category-container">
-                <button class="category-btn" onclick="ac(this)">Informatika <span class="material-symbols-rounded">expand_more</span></button>
-                <div class="category-content">
-                    <a href="#" class="nav-item">Bab 1: Logika Dasar</a>
-                    <a href="#" class="nav-item">Bab 2: Sintaks Python</a>
-                </div>
-            </div>
-            <div class="category-container">
-                <button class="category-btn" onclick="ac(this)">Matematika <span class="material-symbols-rounded">expand_more</span></button>
-                <div class="category-content">
-                    <a href="#" class="nav-item">Bab 1: Persamaan Kuadrat</a>
-                </div>
-            </div>
-        </div>
-    </aside>
+  <!-- ══════════════════════════════════════════════════════════
+       SIDEBAR — Navigation panel (left)
+       Built dynamically by MateriLengkap.buildSidebar() in main.js
+       ══════════════════════════════════════════════════════════ -->
+  <aside class="sidebar" id="mainSidebar">
 
-    <main class="main-content">
-        <nav class="top-nav">
-            <a href="materi.html" class="back-link">
-                <span class="material-symbols-rounded">arrow_back</span>
-                Kembali ke Katalog
-            </a>
-        </nav>
+    <div class="sidebar-header">
+      <span class="logo-sm">S-NX × EDU</span>
+      <span class="daftar-label">Daftar Isi</span>
+    </div>
 
-        <article class="reading-area">
-            <h1>Materi Lengkap</h1>
-            <p>Selamat datang di sesi belajar S-NX terpadu. Silakan gunakan sidebar untuk menavigasi materi.</p>
-            <div class="quote">
-                "Disiplin adalah jembatan antara tujuan dan pencapaian."
-                <br><span style="font-size: 0.8rem; font-weight: 400; opacity: 0.7;">© Sthenos Nyx × Education</span>
-            </div>
-            <h2>Panduan Penggunaan</h2>
-            <p>Portal ini dirancang secara minimalis untuk memaksimalkan fokus membaca Anda. Jika Anda menggunakan HP, klik tombol buku di pojok kanan bawah untuk membuka menu.</p>
-        </article>
-    </main>
+    <div class="sidebar-scroll" id="sidebarScroll">
+      <!-- Loading placeholder, replaced by JS -->
+      <p style="padding:20px 25px;color:var(--muted);font-size:var(--t-xs)">
+        Memuat daftar isi…
+      </p>
+    </div>
 
-    <button class="sidebar-toggle-fab" id="fab-toggle">
-        <span class="material-symbols-rounded" id="fab-icon">menu_book</span>
-    </button>
+  </aside>
 
-    <script>
-        // Set theme
-        document.body.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');
+  <!-- ══════════════════════════════════════════════════════════
+       READER WRAP — Main content area (right)
+       ══════════════════════════════════════════════════════════ -->
+  <main class="reader-wrap" id="readerWrap">
 
-        // Accordion function
-        function ac(b) {
-            let c = b.nextElementSibling;
-            const isOpen = c.style.maxHeight;
-            
-            // Close others (optional)
-            document.querySelectorAll('.category-content').forEach(el => el.style.maxHeight = null);
-            
-            c.style.maxHeight = isOpen ? null : c.scrollHeight + "px";
-        }
+    <!-- Top bar -->
+    <nav class="reader-nav">
+      <a href="materi.html" class="back-link">
+        <span class="material-symbols-rounded">arrow_back</span>
+        Kembali ke Katalog
+      </a>
+    </nav>
 
-        const fabBtn = document.getElementById('fab-toggle');
-        const fabIcon = document.getElementById('fab-icon');
+    <!-- ── WELCOME SCREEN (shown by default) ── -->
+    <div class="welcome-screen" id="welcomeScreen" style="display:none">
 
-        fabBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const isOpen = document.body.classList.toggle('sidebar-open');
-            fabIcon.innerText = isOpen ? "close" : "menu_book";
-        });
+      <h1>Materi Lengkap.</h1>
+      <p>Selamat datang di sesi belajar S-NX terpadu.<br>
+         Gunakan sidebar untuk menavigasi materi yang tersedia.</p>
 
-        // Close when clicking outside on mobile
-        document.addEventListener('click', (e) => {
-            if (window.innerWidth <= 900 && 
-                document.body.classList.contains('sidebar-open') && 
-                !document.getElementById('sidebar').contains(e.target) && 
-                !fabBtn.contains(e.target)) {
-                document.body.classList.remove('sidebar-open');
-                fabIcon.innerText = "menu_book";
-            }
-        });
-    </script>
+      <div class="quote-box" style="max-width:680px;margin-top:40px;text-align:left">
+        <span class="quote-indo">"Disiplin adalah jembatan antara tujuan dan pencapaian."</span>
+        <span class="quote-author">© Sthenos Nyx × Education</span>
+      </div>
+
+      <div style="margin-top:48px;max-width:680px;width:100%;text-align:left">
+        <h2 style="font-size:var(--t-lg);font-weight:700;color:var(--accent);margin-bottom:10px">
+          Panduan Penggunaan
+        </h2>
+        <p style="color:var(--muted);font-size:var(--t-sm);line-height:1.8">
+          Portal ini dirancang secara minimalis untuk memaksimalkan fokus membaca.
+          Jika menggunakan perangkat mobile, tekan tombol buku di pojok kanan bawah
+          untuk membuka menu daftar isi.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- ── READER AREA (filled by loadBab) ── -->
+    <article class="reading-area" id="readerArea" style="display:none">
+
+      <!--
+        REQUIRED IDs — dibaca oleh main.js > MateriLengkap.loadBab():
+          #materi-kategori  ← nama mata pelajaran (eyebrow label)
+          #materi-judul     ← judul bab (dari JSON field "title")
+          #materi-deskripsi ← deskripsi singkat bab
+          #quoteBox         ← container kutipan (disembunyikan jika kosong)
+          #quoteArabic      ← teks Arab kutipan
+          #quoteIndo        ← terjemahan kutipan
+          #quoteAuthor      ← sumber kutipan
+          #materi-isi       ← konten HTML lengkap bab (dari JSON field "isi")
+      -->
+
+      <span class="materi-kategori-label" id="materi-kategori">Mata Pelajaran</span>
+      <h1 id="materi-judul">Memuat…</h1>
+      <p class="intro-text" id="materi-deskripsi"></p>
+
+      <div class="quote-box" id="quoteBox" style="display:none">
+        <div class="quote-arabic"  id="quoteArabic"></div>
+        <span class="quote-indo"   id="quoteIndo"></span>
+        <span class="quote-author" id="quoteAuthor"></span>
+      </div>
+
+      <div class="materi-content" id="materi-isi"></div>
+
+    </article>
+
+    <!-- ── ERROR STATE ── -->
+    <div class="error-state" id="errorState" style="display:none">
+      <h2>Gagal Memuat Materi</h2>
+      <p>
+        Koneksi bermasalah atau file data tidak ditemukan.<br>
+        Pastikan kamu membuka halaman ini melalui server lokal
+        (Live Server / <code>http-server</code>), bukan langsung
+        dari filesystem (<code>file://</code>).
+      </p>
+      <a href="materi.html" class="btn-main"
+         style="display:inline-block;margin-top:28px;padding:13px 28px;width:auto">
+        Kembali ke Katalog
+      </a>
+    </div>
+
+    <footer>
+      <p>&copy; 2026 Sthenos Nyx. All Rights Reserved.</p>
+    </footer>
+
+  </main><!-- end .reader-wrap -->
+
+  <!-- ══════════════════════════════════════════════════════════
+       FAB — Mobile sidebar toggle
+       REQUIRED IDs:
+         #fab-toggle  ← button element (z-index 10005 in CSS)
+         #fab-icon    ← icon span (toggles between menu_book / close)
+       ══════════════════════════════════════════════════════════ -->
+  <button id="fab-toggle" aria-label="Buka daftar isi">
+    <span class="material-symbols-rounded" id="fab-icon">menu_book</span>
+  </button>
+
+  <!-- Single external script — no other inline scripts allowed -->
+  <script src="../assets/js/main.js"></script>
 </body>
 </html>
