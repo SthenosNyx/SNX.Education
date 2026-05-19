@@ -1,1 +1,34 @@
-
+{
+  "events": [
+    {
+      "id": 1,
+      "title": "Outing Class (Ikhwan)",
+      "date": "2026-05-22",
+      "desc": "Kegiatan outing class untuk siswa laki-laki Kelas 8A."
+    },
+    {
+      "id": 2,
+      "title": "Outing Class (Akhwat)",
+      "date": "2026-05-23",
+      "desc": "Kegiatan outing class untuk siswa perempuan Kelas 8A."
+    },
+    {
+      "id": 3,
+      "title": "Ujian Akhir Semester 2",
+      "date": "2026-06-08",
+      "desc": "Ujian Akhir Semester genap untuk semua mata pelajaran."
+    },
+    {
+      "id": 4,
+      "title": "Penerimaan Rapor Semester 2",
+      "date": "2026-06-22",
+      "desc": "Pengambilan rapor semester genap oleh orang tua/wali siswa."
+    },
+    {
+      "id": 5,
+      "title": "Libur Akhir Tahun Ajaran",
+      "date": "2026-06-25",
+      "desc": "Awal libur panjang akhir tahun ajaran 2025/2026."
+    }
+  ]
+}
