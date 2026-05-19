@@ -103,16 +103,9 @@ const CardGlow = {
 /* Expose globally so any inline caller (materi.html legacy) can use it */
 window.CardGlow = CardGlow;
 
-
 /* ── 4. JADWAL PAGE ─────────────────────────────────────────── */
 const JadwalPage = {
-  data: [
-    { id: 1, title: 'Outing Class (Ikhwan)',      date: '2026-05-22' },
-    { id: 2, title: 'Outing Class (Akhwat)',       date: '2026-05-23' },
-    { id: 3, title: 'Ujian Akhir Semester 2',      date: '2026-06-08' },
-    { id: 4, title: 'Penerimaan Rapor Semester 2', date: '2026-06-22' },
-    { id: 5, title: 'Libur Akhir Tahun Ajaran',    date: '2026-06-25' }
-  ],
+  data: [], // Kosong di awal, akan diisi via Fetch API
 
   MONTHS: ['Januari','Februari','Maret','April','Mei','Juni',
            'Juli','Agustus','September','Oktober','November','Desember'],
@@ -120,6 +113,17 @@ const JadwalPage = {
   buildCalendar() {
     const grid = document.getElementById('calGrid');
     if (!grid) return;
+
+    // 🔥 ANTI-DUPLIKASI: Reset grid ke label hari bawaan setiap kali fungsi dijalankan
+    grid.innerHTML = `
+      <div class="day-lbl">MGG</div>
+      <div class="day-lbl">SEN</div>
+      <div class="day-lbl">SEL</div>
+      <div class="day-lbl">RAB</div>
+      <div class="day-lbl">KAM</div>
+      <div class="day-lbl">JUM</div>
+      <div class="day-lbl">SAB</div>
+    `;
 
     const now   = new Date();
     const year  = now.getFullYear();
@@ -171,7 +175,7 @@ const JadwalPage = {
     const now = new Date();
 
     list.innerHTML = this.data.map(e => {
-      const d    = new Date(e.date + 'T00:00:00');
+      const d    = new Date(e.date + 'T00:00:00'); // Pakai timezone lokal browser
       const past = d < now;
       const fmt  = d.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
       return `
@@ -182,13 +186,26 @@ const JadwalPage = {
     }).join('');
   },
 
-  init() {
+  // 🔄 Diubah menjadi Async agar bisa melakukan fetch database luar
+  async init() {
     if (!document.getElementById('calGrid')) return;
-    this.buildCalendar();
-    this.buildEvents();
+    
+    try {
+      // Mengambil data dari folder /data (naik satu tingkat keluar dari /core)
+      const res = await fetch('../data/jadwal-db.json');
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      this.data = await res.json();
+      
+      // Jalankan perakitan setelah data sukses diambil
+      this.buildCalendar();
+      this.buildEvents();
+    } catch (err) {
+      console.error('[S-NX] Gagal memuat jadwal-db.json:', err);
+      const label = document.getElementById('monthLabel');
+      if (label) label.textContent = 'Gagal Memuat Jadwal';
+    }
   }
 };
-
 
 /* ── 5. TUGAS PAGE ──────────────────────────────────────────── */
 const TugasPage = {
