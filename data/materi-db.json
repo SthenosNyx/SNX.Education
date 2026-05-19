@@ -1,1 +1,113 @@
-
+{
+  "subjects": [
+    {
+      "id": "informatika",
+      "name": "Informatika",
+      "chapCount": 7,
+      "desc": "Dasar berpikir komputasional, algoritma, dan pengenalan logika Python untuk Kelas 8.",
+      "babs": [
+        {
+          "id": "informatika-1",
+          "title": "Berpikir Komputasional",
+          "kutipan": {
+            "arab": "الْعِلْمُ صَيْدٌ وَالْكِتَابَةُ قَيْدُهُ",
+            "indo": "Ilmu adalah buruan dan tulisan adalah pengikatnya.",
+            "sumber": "Imam Syafi'i"
+          },
+          "deskripsi": "Berpikir komputasional adalah cara memecahkan masalah dengan meminjam metode yang digunakan komputer: dekomposisi, pengenalan pola, abstraksi, dan algoritmik.",
+          "isi": "<h2>1. Dekomposisi</h2><p>Memecah masalah besar menjadi bagian-bagian lebih kecil yang lebih mudah diselesaikan secara terpisah.</p><h2>2. Pengenalan Pola</h2><p>Mengidentifikasi persamaan atau tren berulang dalam suatu masalah untuk menyederhanakan solusi.</p><h2>3. Abstraksi</h2><p>Menyaring informasi yang tidak relevan dan hanya fokus pada detail yang penting.</p><h2>4. Algoritma</h2><p>Membuat langkah-langkah terurut dan jelas untuk menyelesaikan suatu masalah.</p><ul><li>Setiap langkah harus spesifik dan tidak ambigu</li><li>Algoritma memiliki awal dan akhir yang jelas</li><li>Dapat dieksekusi oleh siapapun atau mesin</li></ul>"
+        },
+        {
+          "id": "informatika-2",
+          "title": "Logika Matematika",
+          "kutipan": {
+            "arab": "",
+            "indo": "Logika adalah seni berpikir yang benar.",
+            "sumber": "Aristoteles"
+          },
+          "deskripsi": "Logika matematika menjadi fondasi semua bahasa pemrograman. Memahami operator logika berarti memahami cara komputer 'berpikir'.",
+          "isi": "<h2>Operator Logika</h2><p>Operator logika digunakan untuk menentukan apakah suatu kondisi bernilai benar (TRUE) atau salah (FALSE).</p><table class='materi-table'><thead><tr><th>Simbol</th><th>Nama</th><th>Penjelasan</th></tr></thead><tbody><tr><td>&&</td><td>AND</td><td>Benar jika keduanya benar</td></tr><tr><td>||</td><td>OR</td><td>Benar jika salah satu benar</td></tr><tr><td>!</td><td>NOT</td><td>Kebalikan dari nilai asli</td></tr></tbody></table><h2>Contoh Penggunaan</h2><p>Jika x = 5 dan y = 10, maka: (x > 3 && y > 3) bernilai TRUE karena keduanya memenuhi syarat.</p>"
+        }
+      ]
+    },
+    {
+      "id": "pai",
+      "name": "Pendidikan Agama Islam",
+      "chapCount": 10,
+      "desc": "Kajian akhlak, fiqih, dan aqidah berdasarkan Al-Qur'an dan Hadits Shahih.",
+      "babs": [
+        {
+          "id": "pai-1",
+          "title": "Adab Menuntut Ilmu",
+          "kutipan": {
+            "arab": "مَنْ سَلَكَ طَرِيقًا يَلْتَمِسُ فِيهِ عِلْمًا سَهَّلَ اللهُ لَهُ بِهِ طَرِيقًا إِلَى الْجَنَّةِ",
+            "indo": "Barangsiapa menempuh jalan untuk mencari ilmu, maka Allah akan memudahkan baginya jalan menuju surga.",
+            "sumber": "HR. Muslim"
+          },
+          "deskripsi": "Adab adalah pondasi utama sebelum seseorang menyerap ilmu pengetahuan. Tanpa adab, ilmu hanya akan menjadi beban informasi tanpa keberkahan.",
+          "isi": "<h2>Pentingnya Niat</h2><p>Langkah pertama dalam menuntut ilmu adalah mengikhlaskan niat karena Allah. Ilmu bukan untuk kesombongan atau pamer kedudukan.</p><h2>Adab kepada Guru</h2><ul><li>Menghormati dan memuliakan guru</li><li>Tidak mendahului ucapan guru tanpa izin</li><li>Bersabar atas keras atau lelahnya guru</li><li>Mendoakan kebaikan bagi guru</li></ul><h2>Adab dalam Belajar</h2><p>Menjaga kebersihan hati dari sifat iri, sombong, dan malas. Seorang penuntut ilmu sejati selalu bersemangat dan tidak mudah putus asa.</p>"
+        },
+        {
+          "id": "pai-2",
+          "title": "Thaharah (Bersuci)",
+          "kutipan": {
+            "arab": "الطَّهُورُ شَطْرُ الإِيمَانِ",
+            "indo": "Kebersihan adalah sebagian dari iman.",
+            "sumber": "HR. Muslim"
+          },
+          "deskripsi": "Thaharah atau bersuci adalah syarat sah ibadah dan cerminan kesempurnaan iman seorang Muslim.",
+          "isi": "<h2>Pengertian Thaharah</h2><p>Thaharah secara bahasa berarti kebersihan. Secara istilah, thaharah adalah menghilangkan najis dan hadats yang menghalangi sahnya ibadah.</p><h2>Rukun Wudhu</h2><ul><li>Niat di dalam hati</li><li>Membasuh wajah</li><li>Membasuh kedua tangan sampai siku</li><li>Mengusap sebagian kepala</li><li>Membasuh kedua kaki sampai mata kaki</li><li>Tertib (berurutan)</li></ul>"
+        }
+      ]
+    },
+    {
+      "id": "arab",
+      "name": "Bahasa Arab",
+      "chapCount": 5,
+      "desc": "Penguatan kosakata, tata bahasa (nahwu-sharaf), dan praktik percakapan Bahasa Arab.",
+      "babs": [
+        {
+          "id": "arab-1",
+          "title": "Kosakata Dasar (Mufrodat)",
+          "kutipan": {
+            "arab": "مَنْ تَعَلَّمَ لُغَةَ قَوْمٍ أَمِنَ مَكْرَهُمْ",
+            "indo": "Siapa yang mempelajari bahasa suatu kaum, ia akan selamat dari tipu daya mereka.",
+            "sumber": "Pepatah Arab"
+          },
+          "deskripsi": "Mufrodat adalah kunci utama dalam memahami Al-Qur'an dan berbicara dalam Bahasa Arab dengan lancar.",
+          "isi": "<h2>Kosakata Sehari-hari</h2><table class='materi-table'><thead><tr><th>Arab</th><th>Arti</th><th>Contoh Kalimat</th></tr></thead><tbody><tr><td class='arabic-hafs'>كِتَابٌ</td><td>Buku</td><td>هَذَا كِتَابٌ جَدِيدٌ (Ini buku baru)</td></tr><tr><td class='arabic-hafs'>مَدْرَسَةٌ</td><td>Sekolah</td><td>أَنَا فِي الْمَدْرَسَةِ (Saya di sekolah)</td></tr><tr><td class='arabic-hafs'>مُعَلِّمٌ</td><td>Guru</td><td>الْمُعَلِّمُ كَرِيمٌ (Guru itu mulia)</td></tr></tbody></table>"
+        }
+      ]
+    },
+    {
+      "id": "matematika",
+      "name": "Matematika",
+      "chapCount": 9,
+      "desc": "Aljabar lanjutan, persamaan kuadrat, dan geometri bidang untuk siswa Kelas 8.",
+      "babs": [
+        {
+          "id": "mat-1",
+          "title": "Persamaan Kuadrat",
+          "kutipan": {
+            "arab": "",
+            "indo": "Matematika adalah bahasa di mana Tuhan menuliskan alam semesta.",
+            "sumber": "Galileo Galilei"
+          },
+          "deskripsi": "Persamaan kuadrat adalah persamaan polinomial berderajat dua dengan bentuk ax² + bx + c = 0. Terdapat tiga metode utama untuk menyelesaikannya.",
+          "isi": "<h2>Bentuk Umum</h2><p>ax² + bx + c = 0, di mana a ≠ 0 dan a, b, c adalah konstanta bilangan real.</p><h2>Metode Pemfaktoran</h2><p>Cari dua bilangan p dan q sehingga p × q = ac dan p + q = b, kemudian faktorkan persamaan.</p><p>Contoh: x² + 5x + 6 = 0 → (x + 2)(x + 3) = 0 → x = -2 atau x = -3</p><h2>Rumus ABC (Kuadratik)</h2><p>x = (-b ± √(b² - 4ac)) / 2a</p><p>Rumus ini selalu bekerja untuk semua persamaan kuadrat, termasuk yang tidak bisa difaktorkan.</p>"
+        },
+        {
+          "id": "mat-2",
+          "title": "Teorema Pythagoras",
+          "kutipan": {
+            "arab": "",
+            "indo": "Pada segitiga siku-siku, kuadrat sisi miring sama dengan jumlah kuadrat dua sisi lainnya.",
+            "sumber": "Pythagoras"
+          },
+          "deskripsi": "Teorema Pythagoras adalah salah satu hasil paling terkenal dalam geometri dan memiliki ratusan pembuktian yang berbeda.",
+          "isi": "<h2>Pernyataan Teorema</h2><p>Jika sebuah segitiga siku-siku memiliki sisi dengan panjang a, b, dan c (dengan c adalah sisi miring/hipotenusa), maka: a² + b² = c²</p><h2>Triple Pythagoras Umum</h2><ul><li>3, 4, 5 (karena 9 + 16 = 25)</li><li>5, 12, 13</li><li>8, 15, 17</li></ul><h2>Aplikasi</h2><p>Digunakan dalam konstruksi bangunan, navigasi, dan perhitungan jarak dalam sistem koordinat.</p>"
+        }
+      ]
+    }
+  ]
+}
