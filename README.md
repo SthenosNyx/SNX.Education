@@ -1,4 +1,5 @@
 # S-NX Education | Opening
+
 S-NX Education (S-Edu) is a digital learning ecosystem that prioritizes an ultra-minimalist aesthetic and high functionality. We will continue to update the system in accordance with user complaints and will develop it until the final stage of perfection.
 
 The portal is a high-fidelity academic environment custom-built for Ibnul Qayyim Islamic School Makassar (IQIS). Developed under the S-NX design philosophy, it integrates a sophisticated UI/UX framework with high-performance logic to streamline the student academic journey.
@@ -32,6 +33,10 @@ The portal is a high-fidelity academic environment custom-built for Ibnul Qayyim
 ├── README.md            (General Project Overview)
 ├── RELEASENOTES.md      (Version History and Changelogs)
 ├── TUTORIAL-ID.md       (User and Deployment Manual)
+├── /assets              (Static Global Assets)
+│   ├── /css             (Global Stylesheets & Design Tokens)
+│   └── /js              (Core Application Scripts)
+├── /data                (JSON Databases)
 └── /core                (Primary Application Logic)
     ├── index.html       (Main Landing Page / Gateway)
     ├── info.html        (Project Metadata and Credits)
