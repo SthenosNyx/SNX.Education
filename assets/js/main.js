@@ -105,7 +105,7 @@ window.CardGlow = CardGlow;
 
 /* ── 4. JADWAL PAGE ─────────────────────────────────────────── */
 const JadwalPage = {
-  data: [], // Kosong di awal, akan diisi via Fetch API
+  data: [], // Tempat menampung array jadwal setelah di-fetch
 
   MONTHS: ['Januari','Februari','Maret','April','Mei','Juni',
            'Juli','Agustus','September','Oktober','November','Desember'],
@@ -186,17 +186,17 @@ const JadwalPage = {
     }).join('');
   },
 
-  // 🔄 Diubah menjadi Async agar bisa melakukan fetch database luar
   async init() {
     if (!document.getElementById('calGrid')) return;
     
     try {
-      // Mengambil data dari folder /data (naik satu tingkat keluar dari /core)
       const res = await fetch('../data/jadwal-db.json');
       if (!res.ok) throw new Error('HTTP ' + res.status);
-      this.data = await res.json();
       
-      // Jalankan perakitan setelah data sukses diambil
+      const json = await res.json();
+      // 🔥 FIX SINKRONISASI: Ambil properti .events dari dalam objek JSON
+      this.data = json.events || [];
+      
       this.buildCalendar();
       this.buildEvents();
     } catch (err) {
