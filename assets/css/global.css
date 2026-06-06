@@ -876,7 +876,7 @@ body.index-body {
   font-size: var(--t-xs); font-weight: 600;
   letter-spacing: 6px; color: var(--muted); margin-bottom: 28px; text-transform: uppercase;
 }
-.index-desc { max-width: 640px; color: var(--muted); line-height: 1.8; margin-bottom: 48px; font-size: var(--t-md); }
+.index-desc { max-width: 640px; color: var(--muted); line-height: 1.8; margin-bottom: 20px; font-size: var(--t-md); }
 .index-desc strong { color: var(--accent); font-weight: 700; }
 .btn-enter {
   display: inline-block; padding: 16px 44px;
