@@ -7,8 +7,6 @@
   <title>S-Edu | Materi Lengkap</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   <link rel="stylesheet" href="../assets/css/global.css">
-
-  <!-- ANTI-FLICKER: Apply saved theme before first paint. This is the ONLY allowed inline script. -->
   <script>
     (function () {
       var t = localStorage.getItem('snx-theme') || 'dark';
@@ -17,11 +15,6 @@
   </script>
 </head>
 <body>
-
-  <!-- ══════════════════════════════════════════════════════════
-       SIDEBAR — Navigation panel (left)
-       Built dynamically by MateriLengkap.buildSidebar() in main.js
-       ══════════════════════════════════════════════════════════ -->
   <aside class="sidebar" id="mainSidebar">
 
     <div class="sidebar-header">
@@ -30,7 +23,6 @@
     </div>
 
     <div class="sidebar-scroll" id="sidebarScroll">
-      <!-- Loading placeholder, replaced by JS -->
       <p style="padding:20px 25px;color:var(--muted);font-size:var(--t-xs)">
         Memuat daftar isi…
       </p>
@@ -39,7 +31,7 @@
   </aside>
 
   <!-- ══════════════════════════════════════════════════════════
-       READER WRAP — Main content area (right)
+       READER WRAP
        ══════════════════════════════════════════════════════════ -->
   <main class="reader-wrap" id="readerWrap">
 
@@ -51,7 +43,7 @@
       </a>
     </nav>
 
-    <!-- ── WELCOME SCREEN (shown by default) ── -->
+    <!-- WELCOME SCREEN-->
     <div class="welcome-screen" id="welcomeScreen" style="display:none">
 
       <h1>Materi Lengkap.</h1>
@@ -76,11 +68,11 @@
 
     </div>
 
-    <!-- ── READER AREA (filled by loadBab) ── -->
+    <!-- READING AREA-->
     <article class="reading-area" id="readerArea" style="display:none">
 
       <!--
-        REQUIRED IDs — dibaca oleh main.js > MateriLengkap.loadBab():
+        REQUIRED IDs
           #materi-kategori  ← nama mata pelajaran (eyebrow label)
           #materi-judul     ← judul bab (dari JSON field "title")
           #materi-deskripsi ← deskripsi singkat bab
@@ -124,19 +116,10 @@
       <p>&copy; 2026 Sthenos Nyx. All Rights Reserved.</p>
     </footer>
 
-  </main><!-- end .reader-wrap -->
-
-  <!-- ══════════════════════════════════════════════════════════
-       FAB — Mobile sidebar toggle
-       REQUIRED IDs:
-         #fab-toggle  ← button element (z-index 10005 in CSS)
-         #fab-icon    ← icon span (toggles between menu_book / close)
-       ══════════════════════════════════════════════════════════ -->
+  </main>
   <button id="fab-toggle" aria-label="Buka daftar isi">
     <span class="material-symbols-rounded" id="fab-icon">menu_book</span>
   </button>
-
-  <!-- Single external script — no other inline scripts allowed -->
   <script src="../assets/js/main.js"></script>
 </body>
 </html>
