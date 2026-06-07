@@ -1,11 +1,5 @@
 /* ================================================================
    S-NX × EDU — assets/js/main.js
-   Single source of truth for ALL page behaviour.
-
-   ANTI-FLICKER NOTE: Each HTML <head> contains a minimal 2-line
-   inline script that reads localStorage and sets data-theme before
-   first paint. This is necessary and intentional for a static site
-   with no server-side rendering. Every other logic lives here.
    ================================================================ */
 
 /* ── 1. THEME ENGINE ──────────────────────────────────────── */
