@@ -31,16 +31,19 @@ The portal is a high-fidelity academic environment custom-built for Ibnul Qayyim
 / (root)
 ├── LICENSE              (Project Licensing)
 ├── README.md            (General Project Overview)
-├── RELEASENOTES.md      (Version History and Changelogs)
-├── TUTORIAL-ID.md       (User and Deployment Manual)
+├── 404.html             (Error Page: Not Found)
 ├── index.html           (Main Landing Page / Gateway)
 ├── /assets              (Static Global Assets)
 │   ├── /css             (Global Stylesheets & Design Tokens)
 │   └── /js              (Core Application Scripts)
 ├── /data                (JSON Databases)
+│   ├── jadwal-db.json 
+│   ├── materi-db.json   
+│   └── tugas-db.json  
 └── /core                (Primary Application Logic)
     ├── info.html        (Project Metadata and Credits)
     ├── jadwal.html      (Academic Calendar Interface)
     ├── materi-lengkap.html (Educational Material with Accordion UI)
     ├── materi.html      (General Resource Library)
+    ├── tentang.html     (Public Information Board)
     └── tugas.html       (Task Management Dashboard)
