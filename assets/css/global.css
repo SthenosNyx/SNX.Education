@@ -1,19 +1,5 @@
 /* ================================================================
-   S-NX × EDU — assets/css/global.css  v3.0
-   ================================================================
-
-   Z-INDEX HIERARCHY  (document-level stacking order)
-   ────────────────────────────────────────────────────
-   1   – 100    page content, cards
-   8 000        materi-lengkap sidebar (desktop fixed)
-   8 500        #fab-toggle  (materi-lengkap mobile)
-   8 800        .nav-overlay (mobile menu backdrop)
-                             ← INTENTIONALLY below .snx-nav
-                               so the nav bar—including the
-                               hamburger / X button—is ALWAYS
-                               clickable even when overlay is open
-   9 000        .snx-nav     (sticky header, contains toggle)
-   9 500        .nav-links   (mobile panel, position:fixed)
+   S-NX × EDU — assets/css/global.css  v1.1
    ================================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap');
@@ -341,8 +327,8 @@ body {
 
 .filter-label {
   display: inline-block;
-  margin-top: 18px;
-  margin-bottom: -7px;
+  margin-top: 4px;
+  margin-bottom: 18px;
   padding: 6px 18px;
   border: 1px solid var(--border);
   border-radius: 50px;
@@ -870,7 +856,7 @@ body.index-body {
 }
 .index-logo {
   font-size: var(--t-3xl); font-weight: 800;
-  letter-spacing: 4px; text-transform: uppercase; margin-bottom: 6px;
+  letter-spacing: 4px; text-transform: uppercase; margin-bottom: 6px; line-height: 1.2;
 }
 .index-sub {
   font-size: var(--t-xs); font-weight: 600;
@@ -879,7 +865,7 @@ body.index-body {
 .index-desc { max-width: 640px; color: var(--muted); line-height: 1.8; margin-bottom: 20px; font-size: var(--t-md); }
 .index-desc strong { color: var(--accent); font-weight: 700; }
 .btn-enter {
-  display: inline-block; padding: 16px 44px;
+  display: inline-block; padding: 12px 35px;
   border: 1px solid var(--border); border-radius: 50px;
   color: var(--text); font-size: var(--t-sm);
   font-weight: 700; letter-spacing: 2px; text-transform: uppercase; background: transparent;
