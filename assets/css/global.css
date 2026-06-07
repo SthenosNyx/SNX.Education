@@ -293,9 +293,8 @@ body {
   transform: translateY(-1px);
 }
 .badge-accent {
-  background: var(--accent-soft);
   color: var(--accent);
-  border-color: transparent;
+  border: 1px solid rgb(92 92 255 / 16%;
 }
 
 .deadline {
