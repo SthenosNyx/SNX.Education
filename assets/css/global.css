@@ -875,6 +875,12 @@ body.index-body {
   border-color: var(--accent); background: var(--accent-soft); color: var(--accent);
   transform: translateY(-3px); box-shadow: 0 10px 30px rgba(92, 92, 255, 0.2);
 }
+.header-container {
+    display: flex;           /* Membuat elemen jadi berbaris */
+    align-items: center;     /* Menyelaraskan teks secara vertikal (tengah) */
+    gap: 15px;               /* Memberi jarak antara judul dan pill */
+    justify-content: center; /* Memastikan posisi semuanya tetap di tengah layar */
+}
 
 /* ══════════════════════════════════════════════════════════════
    16. RESPONSIVE BREAKPOINTS
