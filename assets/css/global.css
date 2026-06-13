@@ -278,10 +278,10 @@ body {
 }
 
 .badge {
-  display: inline-flex;
+  display: inline-block;
   align-items: center;
   font-size: 0.6rem;
-  font-weight: 700;
+  font-weight: 600;
   padding: 7px 11px;
   border-radius: 100px;
   border: 1px solid var(--border);
@@ -289,7 +289,7 @@ body {
   letter-spacing: 1px;
   text-transform: uppercase;
   vertical-align: middle;
-  margin-left: 8px;
+  margin-left: 0px;
   transform: translateY(-1px);
 }
 .badge-accent {
@@ -300,7 +300,7 @@ body {
 .badge-accent-2 {
    background: transparent;
    color: var(--muted);
-   border-color: #1a1a1a;
+   border-color: var(--border);
 }
 
 .deadline {
@@ -861,13 +861,13 @@ body.index-body {
 }
 .index-logo {
   font-size: var(--t-3xl); font-weight: 800;
-  letter-spacing: 4px; text-transform: uppercase; margin-bottom: 6px; line-height: 1.2;
+  letter-spacing: 4px; text-transform: uppercase; margin-bottom: 0px; line-height: 1;
 }
 .index-sub {
   font-size: var(--t-xs); font-weight: 600;
   letter-spacing: 6px; color: var(--muted); margin-bottom: 28px; text-transform: uppercase;
 }
-.index-desc { max-width: 640px; color: var(--muted); line-height: 1.8; margin-bottom: 20px; font-size: var(--t-md); }
+.index-desc { max-width: 640px; color: var(--muted); line-height: 1.8; margin-bottom: 20px; margin-top: 15px; font-size: var(--t-md); }
 .index-desc strong { color: var(--accent); font-weight: 700; }
 .btn-enter {
   display: inline-block; padding: 12px 35px;
