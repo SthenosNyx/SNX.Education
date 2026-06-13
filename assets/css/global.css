@@ -43,7 +43,7 @@
   --r-lg: 24px;
   --r-xl: 32px;
 
-  /* Motion — premium cubic only, never linear */
+  /* Motion */
   --ease:  0.4s  cubic-bezier(0.22, 1, 0.36, 1);
   --fast:  0.22s cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -92,10 +92,7 @@ body {
 }
 
 /* ════════════════════════════════════════════════════════════
-   4. NAVBAR — Stacking context is the root fix for mobile
-      .snx-nav at 9000 > .nav-overlay at 8800
-      so the nav bar (toggle button included) can never be
-      blocked by the backdrop overlay.
+   4. NAVBAR
    ════════════════════════════════════════════════════════════ */
 .snx-nav {
   display: flex;
@@ -201,8 +198,6 @@ body {
 .menu-toggle.is-open .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 /* ── Mobile nav overlay backdrop ──
-   z-index 8800 — sits BELOW .snx-nav (9000) so the nav bar
-   stays interactive even when the overlay is active.       */
 .nav-overlay {
   display: none;            /* off on desktop */
   position: fixed;
@@ -282,7 +277,6 @@ body {
   align-items: center;
   font-size: 0.6rem;
   font-weight: 600;
-  padding: 7px 11px;
   border-radius: 100px;
   border: 1px solid var(--border);
   color: var(--muted);
@@ -296,11 +290,13 @@ body {
   background: transparent;
   color: var(--accent);
   border-color: var(--accent);
+  padding: 4px 11px;
 }
 .badge-accent-2 {
    background: transparent;
    color: var(--muted);
    border-color: var(--border);
+   padding: 7px 11px;
 }
 
 .deadline {
