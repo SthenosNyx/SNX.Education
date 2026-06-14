@@ -99,7 +99,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 18px 8%;
-  background: #000000f0;
+  background: var(--bg);
   border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
