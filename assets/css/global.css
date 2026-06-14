@@ -86,7 +86,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  overflow-x: hidden;
+  overflow-x: clip;
   transition: background var(--ease), color var(--ease);
   line-height: 1.65;
 }
