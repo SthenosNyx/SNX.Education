@@ -99,9 +99,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 18px 8%;
-  background: var(--nav-bg);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  background: #000000f0;
   border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
